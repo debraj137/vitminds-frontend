@@ -1,0 +1,9 @@
+<div id="wrapper">
+  <app-header
+    [customClass]="'fullwidth dashboard-header not-sticky'"
+  ></app-header>
+  <div class="dashboard-container">
+    <app-side-menu class="dashboard-sidebar"></app-side-menu>
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="dashboard-content-container" *ngIf="!editFlag" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- <div class="dashboard-headline"> -->
+    <h3>Feedback</h3>
+
+    <!-- Breadcrumbs -->
+    <!-- <nav id="breadcrumbs" class="dark">
+                              <ul>
+                                  <li><a href="#">Home</a></li>
+                                  <li><a href="#">Dashboard</a></li>
+                                  <li>Post a Job</li>
+                              </ul>
+                          </nav> -->
+    <!-- </div> -->
+
+    <!-- Row -->
+    <div class="row">
+      <!-- Dashboard Box -->
+      <div class="col-xl-12">
+        <div class="dashboard-box">
+          <!-- Headline -->
+          <div class="headline">
+            <h5>
+              <i class="icon-feather-folder-plus"></i> Feedback List
+              <!-- <button
+                  class="btn btn-primary btn-sm floats-right"
+                  type="button"
+                  [routerLink]="['/admin/question']"
+                >
+                  <i class="fa fa-plus" style="font-size:20px"></i>
+                </button> -->
+            </h5>
+            <br />
+            <!-- <input
+                [(ngModel)]="searchText"
+                placeholder="Search question.."
+                class="form-control"
+              /> -->
+          </div>
+
+          <!--  <table class="table" width="50">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Technical</th>
+                <th>Communication</th>
+                <th>Aptitude</th>
+                <th>Message</th>
+                <th>Submitted Date</th>
+                <th>Cleared your doubt</th>
+                <th>Explained concept</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let feedback of feedback_list; let i = index">
+                <td>{{ feedback.id }}</td>
+                <td>{{ feedback.email }}</td>
+                <td>{{ feedback.technical }}</td>
+                <td>{{ feedback.communication }}</td>
+                <td>{{ feedback.aptitude }}</td>
+                <td>{{ feedback.message }}</td>
+                <td> {{ feedback.submittedOn | date: "dd-mm-yyyy" }}</td>
+                <td>{{ feedback.cleared_your_doubt }}</td>
+                <td>{{ feedback.explained_concept }}</td>
+                <td><span class="delete-ico">
+                    <i data-toggle="tooltip" data-placement="top"title="Delete" 
+                    class="icon-line-awesome-trash-o" (click)="delete(feedback)"></i></span>
+                </td>
+              </tr>
+            </tbody>
+          </table> -->
+          <div class="card border-secondary">
+            <table
+              class="table table-striped"
+              *ngFor="let feedback of listOfFeedback"
+            >
+              <tr>
+                <td scope="col" width="40%">
+                  <label>Email :</label>{{ feedback.email }}<br />
+                  <label>Message :</label>{{ feedback.message }}<br />
+                  <label>Submitted Date :</label
+                  >{{ feedback.submittedOn | date: "dd-mm-yyyy" }}<br />
+                  <label>Explained concept :</label
+                  >{{ feedback.explained_concept }}
+                </td>
+
+                <td scope="col" width="30%">
+                  <label>Technical :</label>{{ feedback.technical }}<br />
+                  <label>Aptitude :</label>{{ feedback.aptitude }}<br />
+                  <label>Communication :</label>{{ feedback.communication
+                  }}<br />
+                  <label>Cleared your doubt :</label
+                  >{{ feedback.cleared_your_doubt }}
+                </td>
+                <td scope="col" width="15%">
+                  <label>Action:</label>
+
+                  <span class="delete-ico">
+                    <i
+                      data-toggle="tooltip"
+                      data-placement="floats-right"
+                      title="Delete"
+                      class="icon-line-awesome-trash-o"
+                      (click)="confirmModel(feedback)"
+                    ></i
+                  ></span>
+                </td>
+              </tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[5, 10, 25, 50]"
+              [pageSize]="10"
+              [length]="totalElements"
+              (page)="nextPage($event)"
+            >
+            </mat-paginator>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Content / End -->
+    </div>
+    <!-- Dashboard Container / End -->
+  </div>
+</div>

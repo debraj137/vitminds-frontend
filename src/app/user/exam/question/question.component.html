@@ -1,0 +1,155 @@
+<div *ngIf="questionDetail != null" class="question-content__title">
+  <span class="question-content__number"> Question {{ index }} </span>
+  <span class="question-content__mark">
+    Max. Marks {{ questionDetail.marks }}
+  </span>
+</div>
+
+<div *ngIf="questionDetail != null" class="question-content__question">
+  {{ questionDetail.name }}
+</div>
+
+<!-- <div class="question-content__question question-content__question--code">
+  <code>
+    const a = "lol";
+  </code>
+</div> -->
+
+<div
+  *ngIf="questionDetail != null && questionDetail.options.length > 0"
+  class="question-content__options"
+>
+  <div
+    *ngFor="let option of questionDetail.options; let i = index"
+    class="radio"
+    [class.radio--wrong]="type === 'summery'"
+  >
+    <input
+      id="radio-{{ i }}"
+      name="radio"
+      type="radio"
+      (click)="onClickOption(questionDetail.id, option.id)"
+      [checked]="optionMap[questionDetail.id] === option.id"
+    />
+    <label for="radio-{{ i }}">
+      <span class="radio-label"></span>
+      {{ option.name }}</label
+    >
+  </div>
+
+  <br />
+
+  <!-- <div class="radio" [class.radio--correct]="type === 'summery'">
+    <input id="radio-2" name="radio" type="radio" />
+    <label for="radio-2"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+
+  <br />
+
+  <div class="radio">
+    <input id="radio-3" name="radio" type="radio" checked />
+    <label for="radio-3"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+
+  <br />
+
+  <div class="radio">
+    <input id="radio-4" name="radio" type="radio" />
+    <label for="radio-4"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div> -->
+</div>
+
+<div class="question-content__buttons">
+  <button (click)="confirmBrforeSubmit(examId)" class="button ripple-effect">
+    Submit
+  </button>
+  <span class="info">
+    Don't forgot to submit your answer.
+  </span>
+</div>
+
+<!-- <div *ngIf="questionDetail.examQuestionId.question.description " class="question-content__explanation">
+  <h5 class="question-content__explanation-title">
+    Explanation:
+  </h5>
+  <p class="question-content__explanation-detail">
+    {{questionDetail.examQuestionId.question.description}}
+  </p>
+</div> -->
+
+<!-- --------------------------------------------- -->
+<!-- 
+<div class="question-content__title">
+  <span class="question-content__number">
+    Question 2
+  </span>
+  <span class="question-content__mark">
+    Max. Marks 1.00
+  </span>
+</div>
+
+<div class="question-content__question question-content__question--code">
+  <code>
+    const a = "lol";
+  </code>
+</div>
+
+<div class="question-content__options">
+  <div class="radio">
+    <input id="radio-1" name="radio" type="radio" checked />
+    <label for="radio-1"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+
+  <br />
+
+  <div class="radio" [class.radio--correct]="type === 'summery'">
+    <input id="radio-2" name="radio" type="radio" />
+    <label for="radio-2"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+
+  <br />
+
+  <div class="radio">
+    <input id="radio-3" name="radio" type="radio" checked />
+    <label for="radio-3"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+
+  <br />
+
+  <div class="radio">
+    <input id="radio-4" name="radio" type="radio" />
+    <label for="radio-4"
+      ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+    >
+  </div>
+</div>
+
+<div *ngIf="type === ''" class="question-content__buttons">
+  <button href="#" class="button ripple-effect">Submit</button>
+  <span class="info">
+    Don't forgot to submit your answer.
+  </span>
+</div>
+
+<div *ngIf="type === 'summery'" class="question-content__explanation">
+  <h5 class="question-content__explanation-title">
+    Explanation:
+  </h5>
+  <p class="question-content__explanation-detail">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, incidunt
+    nobis tempore soluta illum explicabo, nam ullam laudantium et, odio quis
+    impedit veritatis ad. Quisquam reprehenderit tempore aperiam omnis veniam.
+  </p>
+</div>  -->

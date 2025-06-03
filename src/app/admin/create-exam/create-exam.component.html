@@ -1,0 +1,113 @@
+<!-- Dashboard Content
+            ================================================== -->
+<div class="dashboard-content-container" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- Dashboard Headline -->
+    <div class="dashboard-headline"></div>
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="col-xl-6 offset-xl-3">
+          <div class="dashboard-box">
+            <!-- Headline -->
+            <div class="headline">
+              <h5>
+                <i class="icon-feather-folder-plus"></i> Create Exam
+                <span
+                  ><a class="add-btn"
+                    ><i class="icon-material-outline-add"></i></a
+                ></span>
+              </h5>
+            </div>
+
+            <div class="content with-padding padding-bottom-10">
+              <div class="submit-field">
+                <input
+                  type="text"
+                  class="with-border"
+                  [(ngModel)]="exam.name"
+                  placeholder="exam name"
+                />
+              </div>
+              <div class="submit-field">
+                <select [(ngModel)]="exam.course.id">
+                  <option [ngValue]="undefined" disabled>select course</option>
+                  <option *ngFor="let sub of items" value="{{ sub.id }}">{{
+                    sub.name
+                  }}</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="submit-field">
+                    <input
+                      type="date"
+                      class="with-border"
+                      [(ngModel)]="exam.date"
+                      placeholder="From"
+                    />
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="submit-field">
+                    <input
+                      type="time"
+                      class="with-border"
+                      [(ngModel)]="exam.startTime"
+                      placeholder="start time"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-xl-12">
+                  <div class="submit-field">
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.duration"
+                      placeholder="duration in mins"
+                    />
+                  </div>
+                  <div class="submit-field">
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.maxmarks"
+                      placeholder="marks"
+                    />
+                  </div>
+                  <div class="submit-field">
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.passmarks"
+                      placeholder="passing marks"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <a
+                  class="button 
+                        col-xl-3 small margin-top-30"
+                >
+                  Cancel</a
+                >
+                <a
+                  (click)="saveExam()"
+                  class="button col-xl-3 offset-xl-6 small margin-top-30"
+                  >Save</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard Box -->
+
+      <!-- Dashboard Content / End -->
+    </div>
+    <!-- Dashboard Container / End -->
+  </div>
+</div>

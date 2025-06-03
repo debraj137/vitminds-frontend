@@ -1,0 +1,39 @@
+@import "~ngx-toastr/toastr.css";
+
+::ng-deep {
+  .overlay {
+    top: 5em;
+  }
+
+  .nsm-content {
+    padding: 3rem;
+  }
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.ptr {
+  cursor: pointer;
+}
+
+.brdr {
+  //  border: none;
+  border: 0;
+  outline: 1px solid red;
+  border-radius: 4px !important;
+}
+
+.bdr-red {
+  border-color: red !important;
+}
+
+.f-r {
+  width: 100%;
+  text-align: center;
+  color: white !important;
+}

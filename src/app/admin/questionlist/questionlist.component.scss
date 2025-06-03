@@ -1,0 +1,52 @@
+.floats-right {
+  float: right;
+}
+
+.hvr {
+  cursor: pointer;
+  color: red;
+}
+
+.ptr {
+  cursor: pointer;
+}
+
+.table th,
+.table td {
+  // padding: 0.75rem;
+  width: 300px;
+  padding-left: 2rem;
+}
+.brdr {
+  border-color: red !important;
+}
+
+.input-file {
+  padding: 10px 17px 10px 20px;
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.testcase {
+  margin-left: 3%;
+}
+table {
+  font-family: "Arial Narrow", Arial, "Helvetica Condensed", Helvetica,
+    sans-serif;
+  color: darkslategrey;
+
+  label {
+    font-family: "Arial Narrow", Arial, "Helvetica Condensed", Helvetica,
+      sans-serif;
+    color: mediumblue;
+  }
+}
+
+.sortBySub {
+  margin-left: 90%;
+}

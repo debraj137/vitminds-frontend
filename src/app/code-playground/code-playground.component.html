@@ -1,0 +1,58 @@
+<!-- <div class="editor-part"><p>Editor part</p></div> -->
+<select
+  class="chooseLang"
+  [(ngModel)]="language"
+  (change)="onChangeLangauge($event.target.value)"
+>
+  <option [ngValue]="undefined" disabled>Choose a Language</option>
+  <option *ngFor="let subject of subjectList" value="{{ subject }}">
+    {{ subject }}
+  </option></select
+>
+
+<div
+  ace-editor
+  [(text)]="code"
+  [mode]="'java'"
+  [theme]="'eclipse'"
+  [options]="options"
+  [readOnly]="false"
+  [autoUpdateContent]="true"
+  [durationBeforeCallback]="1000"
+  (textChanged)="onChange($event)"
+  style="min-height: 80%; width:300%; font-size: 18px; margin-top:1%"
+></div>
+
+<button class="button runBtn" (click)="doCompile(question.id)">
+  Run
+</button>
+<!-- <button
+  *ngIf="language == 'Java Script'"
+  class="button runBtn"
+  (click)="compileJS(question.id)"
+>
+  Run
+</button> -->
+
+<div class="form-group textarea">
+  <label>Custum Test Case</label>
+  <textarea class="form-control" [(ngModel)]="input" rows="5"> </textarea>
+</div>
+<div *ngIf="input">
+  Input is:
+  <p>{{ input }}</p>
+</div>
+
+<div *ngIf="codeOutput">
+  Standard output is:
+  <p>
+    {{ codeOutput }}
+  </p>
+</div>
+
+<div *ngIf="codeError && !codeOutput" class="stdError">
+  Standard Error is:
+  <p>
+    {{ codeError }}
+  </p>
+</div>

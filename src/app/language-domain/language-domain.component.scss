@@ -1,0 +1,49 @@
+a.job-listing {
+    text-decoration: none;
+}
+
+.job-listing:hover {
+    background: #efefefc9;
+}
+
+.job-listing-details {
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+}
+
+//breadcrumbs
+#titlebar {
+    padding: 20px 0px 10px !important;
+    margin-bottom: 0px !important;
+    background-color: #1386f1 !important;
+    h4 {
+        color: #fff;
+        margin-bottom: 0px; // margin-bottom: 0px;
+    }
+    #breadcrumbs {
+        right: 0px;
+        top: 12px; //left: -6px;
+        font-size: 13px;
+        color: #fff;
+        background-color: transparent;
+    }
+    #breadcrumbs ul li a {
+        color: #dddddd;
+    }
+    #breadcrumbs ul li a:hover {
+        color: #fff;
+        cursor: pointer;
+    }
+    #breadcrumbs ul li:before {
+        border-left: 4px solid #fff;
+    }
+}
+
+.sidebar-widget {
+    h5 {
+        border-bottom: 2px solid #d5d4d4;
+        width: 30%;
+    }
+}

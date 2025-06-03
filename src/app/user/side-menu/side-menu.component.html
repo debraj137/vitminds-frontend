@@ -1,0 +1,71 @@
+<div class="dashboard-sidebar-inner" data-simplebar>
+  <div class="dashboard-nav-container">
+    <!-- Responsive Navigation Trigger -->
+    <a href="dashboard.html#" class="dashboard-responsive-nav-trigger">
+      <span class="hamburger hamburger--collapse">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </span>
+      <span class="trigger-title">Dashboard Navigation</span>
+    </a>
+
+    <!-- Navigation -->
+    <div class="dashboard-nav">
+      <div class="dashboard-nav-inner">
+        <ul data-submenu-title="Start">
+          <li class="active">
+            <a [routerLink]="['/user/dashboard']"
+              ><i class="icon-material-outline-dashboard"></i> Dashboard</a
+            >
+          </li>
+          <!-- <li>
+            <a [routerLink]="['/user/exam_list/practice']"
+              ><i class="icon-material-outline-question-answer"></i> View
+              Practice Test
+            </a>
+          </li> -->
+          <li>
+            <a [routerLink]="['/user/exam_list/all']"
+              ><i class="icon-material-outline-question-answer"></i> View All
+              Exams
+            </a>
+            <!-- <span class="nav-tag">2</span> -->
+          </li>
+          <li>
+            <a [routerLink]="['/user/exam_list/finished']"
+              ><i class="icon-material-outline-star-border"></i> Finished
+              Exam</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/user/enroll_and_pay']"
+              ><i class="icon-material-outline-star-border"></i> Enroll and Pay
+            </a>
+          </li>
+          <!-- <li>
+            <a [routerLink]="['/user/profile']"><i class="icon-material-outline-star-border"></i> Profile</a>
+          </li> -->
+        </ul>
+
+        <ul data-submenu-title="Account">
+          <!-- <li>
+            <a [routerLink]="['/user/profile']"><i class="icon-material-outline-settings"></i> Profile</a>
+          </li> -->
+          <li>
+            <a [routerLink]="['/user/profile']"
+              ><i class="icon-material-outline-settings"></i> Settings</a
+            >
+          </li>
+          <li>
+            <a (click)="logoutEndUser()" class="hvr"
+              ><i class="icon-material-outline-power-settings-new"></i>
+              Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Navigation / End -->
+  </div>
+</div>

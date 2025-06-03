@@ -1,0 +1,489 @@
+<!-- Breadcrumbs -->
+<div id="titlebar" class="gradient">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4>"Language Task"</h4>
+        <nav id="breadcrumbs" class="breadcrumbs">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li>LanguageTask</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Breadcrumbs end -->
+
+<div class="bg-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-8">
+        <!-- <h3 class="page-title"> Language Task</h3> -->
+        <div class="content with-padding padding-bottom-10">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: currentSort === 'home' }"
+                (click)="navigateTo('home')"
+                id="home-tab"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="Problem"
+                aria-selected="true"
+                >Problem</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: currentSort === 'submission' }"
+                (click)="navigateTo('submission')"
+                id="sub-tab"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="Submission"
+                aria-selected="false"
+                >Submission</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: currentSort === 'leaderboard' }"
+                (click)="navigateTo('leaderboard')"
+                id="lead-tab"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="Leaderboard"
+                aria-selected="false"
+                >Leaderboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                [ngClass]="{ active: currentSort === 'discussions' }"
+                (click)="navigateTo('discussions')"
+                id="diss"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="Discussions"
+                aria-selected="false"
+                >Discussions</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show"
+              [ngClass]="{ active: currentSort === 'home' }"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div
+                class="tab-wrapper"
+                *ngIf="question"
+                [innerHTML]="question.description"
+              >
+                <!-- <b>Objective</b>
+                <p>
+                  Most HackerRank challenges require you to read input from
+                  stdin (standard input) and write output to stdout (standard
+                  output). One popular way to read input from stdin is by using
+                  the Scanner class and specifying the Input Stream as
+                  System.in. For example: Scanner scanner = new
+                  Scanner(System.in); String myString = scanner.next(); int
+                  myInt = scanner.nextInt(); scanner.close();
+                  System.out.println("myString is: " + myString);
+                  System.out.println("myInt is: " + myInt); The code above
+                  creates a Scanner object named and uses it to read a String
+                  and an int. It then closes the Scanner object because there is
+                  no more input to read, and prints to stdout using
+                  System.out.println(String). So, if our input is: Hi 5 Our code
+                  will print: myString is: Hi myInt is: 5 Alternatively, you can
+                  use the BufferedReader class.
+                </p>
+                <b> Task </b>
+                <p ></p>
+
+                <b>Input Format</b>
+
+                <p>You do not need to read any input in this challenge.</p>
+
+                <b>Output Format</b>
+
+                <p>
+                  Print <i>Hello world!</i> on the first line, and the string
+                  from the given input on the second line.
+                </p>
+
+                <b>Sample Input 0</b>
+                <div class="answer-part">
+                  Welcome to C programming.
+                </div>
+                <br />
+                <b>Sample Output 0</b>
+                <div class="answer-part">
+                  Hello world!<br />
+                  Welcome to C programming.
+                </div> -->
+              </div>
+              <div class="editor-part"><p>Editor part</p></div>
+              <!-- <div>
+                  <app-code-playground
+                  [question] = "question"
+                  ></app-code-playground>
+                </div> -->
+              <!-- <select
+              class ="chooseLang"
+              [(ngModel)]= "language">
+              <option [ngValue]="undefined" disabled>Choose a Language</option>
+              <option *ngFor = "let subject of subjectList" value= {{subject.name}}> 
+                {{subject.name}}
+              </select> -->
+
+              <div
+                ace-editor
+                [(text)]="code"
+                [mode]="'java'"
+                [theme]="'eclipse'"
+                [options]="options"
+                [readOnly]="false"
+                [autoUpdateContent]="true"
+                [durationBeforeCallback]="1000"
+                (textChanged)="onChange($event)"
+                style="min-height: 300px; width:100%; font-size: 18px; margin-top:1%"
+              ></div>
+
+              <button
+                class="button submitBtn"
+                (click)="submitCodeTestCases(question.id)"
+              >
+                Submit
+              </button>
+
+              <button class="button runBtn" (click)="doCompile(question.id)">
+                Run
+              </button>
+
+              <!-- <input *ngIf="!customFlag" type="checkbox" (click) = "customInput()">Test Custom Input<br><br> -->
+              <div class="form-group textarea">
+                <label>Custum Test Case</label>
+                <textarea class="form-control" [(ngModel)]="input" rows="5">
+                </textarea>
+              </div>
+              <div *ngIf="input">
+                Input is:
+                <p>{{ input }}</p>
+              </div>
+
+              <div *ngIf="codeOutput">
+                Standard output is:
+                <p>
+                  {{ codeOutput }}
+                </p>
+              </div>
+
+              <div *ngIf="codeError" class="stdError">
+                Standard Error is:
+                <p>
+                  {{ codeError }}
+                </p>
+              </div>
+
+              <div *ngIf="submitFlag">
+                <div
+                  *ngFor="let tCase of testCaseList; let i = index"
+                  class="exam__question-list"
+                >
+                  Test Case {{ i }} &nbsp;
+
+                  <div class="box">
+                    <div>
+                      Compiler Message
+
+                      <p>{{ tCase.status }}</p>
+                    </div>
+                    <div
+                      *ngFor="let testInput of tCase.testCase.testCaseInputs"
+                    >
+                      Input
+
+                      <p>{{ testInput.input }}</p>
+                    </div>
+                    <div>
+                      Expected Output
+
+                      <p>{{ tCase.testCase.output }}</p>
+                    </div>
+                    <div>
+                      Your Output
+
+                      <p>{{ yourOutput[tCase.testCase.id] }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="exam__question-list">
+          Test Case 2
+        </div> -->
+
+            <div
+              class="tab-pane fade show"
+              [ngClass]="{ active: currentSort === 'submission' }"
+              id="sub"
+              role="tabpanel"
+              aria-labelledby="sub-tab"
+            >
+              <table class="basic-table">
+                <tr>
+                  <th>Result</th>
+                  <th>Score</th>
+                  <th>Language</th>
+                  <th>Time</th>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1">
+                    {{ submissionData.resultStatus }}
+                  </td>
+                  <td data-label="Column 2">{{ submissionData.score }}</td>
+                  <td data-label="Column 3">{{ submissionData.language }}</td>
+                  <td data-label="Column 3">
+                    {{ submissionData.submittedOn }}
+                  </td>
+                </tr>
+              </table>
+
+              <p *ngIf="submissionData == null">
+                You have not made any submissions for Playing With Characters
+                yet.
+              </p>
+              <!--<button type="button" class="btn btn-primary">
+                Solve Playing with character
+              </button> -->
+            </div>
+
+            <div
+              class="tab-pane fade show"
+              [ngClass]="{ active: currentSort === 'leaderboard' }"
+              id="lead"
+              role="tabpanel"
+              aria-labelledby="lead-tab"
+            >
+              <table class="basic-table">
+                <tr>
+                  <th>Column 1</th>
+                  <th>Column 2</th>
+                  <th>Column 3</th>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1">Item</td>
+                  <td data-label="Column 2">Description</td>
+                  <td data-label="Column 3">Description</td>
+                </tr>
+              </table>
+            </div>
+            <div
+              class="tab-pane fade show"
+              [ngClass]="{ active: currentSort === 'discussions' }"
+              id="diss"
+              role="tabpanel"
+              aria-labelledby="diss-tab"
+            >
+              <div class="messages-inbox">
+                <div class="messages-headline">
+                  <div class="input-with-icon">
+                    <input
+                      id="autocomplete-input"
+                      type="text"
+                      placeholder="Search comments"
+                    />
+                    <i class="icon-material-outline-search"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="editor-part"><p>Editor part</p></div>
+
+              <div class="messages-container margin-top-20">
+                <div class="messages-container-inner">
+                  <div class="message-content">
+                    <div class="messages-headline">
+                      <h4>Comments</h4>
+                      <a href="#" class="message-action"
+                        ><i class="icon-feather-trash-2"></i> Delete
+                        Conversation</a
+                      >
+                    </div>
+
+                    <!-- Message Content Inner -->
+                    <div class="message-content-inner">
+                      <!-- Time Sign -->
+                      <div class="message-time-sign">
+                        <span>28 June, 2019</span>
+                      </div>
+
+                      <div class="message-bubble me">
+                        <div class="message-bubble-inner">
+                          <div class="message-avatar">
+                            <img
+                              src="/assets/images/user-avatar-big-01.jpg"
+                              alt=""
+                            />
+                          </div>
+                          <div class="message-text">
+                            <p>
+                              Thanks for choosing my offer. I will start working
+                              on your project tomorrow.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+
+                      <div class="message-bubble">
+                        <div class="message-bubble-inner">
+                          <div class="message-avatar">
+                            <img
+                              src="/assets/images/user-avatar-big-02.jpg"
+                              alt=""
+                            />
+                          </div>
+                          <div class="message-text">
+                            <p>
+                              Great. If you need any further clarification let
+                              me know.
+                            </p>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+
+                      <!-- Message Content Inner -->
+                      <div class="message-content-inner">
+                        <!-- Reply Area -->
+                        <div class="message-reply">
+                          <textarea
+                            cols="1"
+                            rows="1"
+                            placeholder="Your Message"
+                            data-autoresize
+                          ></textarea>
+                          <button class="button ripple-effect">Send</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div
+                class="tab-pane fade show"
+                [ngClass]="{ active: currentSort === 'feedback' }"
+                id="feedback"
+                role="tabpanel"
+                aria-labelledby="feed-tab"
+              >
+                <h5 class="headline margin-top-15 margin-bottom-35">
+                  Share your feedback with us!
+                </h5>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="input-with-icon-left">
+                      <input
+                        class="with-border"
+                        name="name"
+                        type="text"
+                        id="name"
+                        placeholder="Your Name"
+                        required="required"
+                      />
+                      <i class="icon-material-outline-account-circle"></i>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="input-with-icon-left">
+                      <input
+                        class="with-border"
+                        name="email"
+                        type="email"
+                        id="email"
+                        placeholder="Email Address"
+                        pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
+                        required="required"
+                      />
+                      <i class="icon-material-outline-email"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <textarea
+                    class="with-border"
+                    name="comments"
+                    cols="40"
+                    rows="5"
+                    id="comments"
+                    placeholder="Message"
+                    spellcheck="true"
+                    required="required"
+                  ></textarea>
+                </div>
+
+                <input
+                  type="submit"
+                  class="submit button margin-top-15"
+                  id="submit"
+                  value="Submit"
+                />
+
+                <div class="checkbox">
+                  <label>
+                    <span><input type="text" class="with-border"/></span>
+                  </label>
+                </div>
+              </div> -->
+            </div>
+            <!--tab end-->
+          </div>
+          <!--tab content end-->
+        </div>
+      </div>
+      <!--col-9 end-->
+
+      <!--rightside part-->
+      <div class="col-xl-3 col-lg-4 margin-top-10">
+        <div class="sidebar-container">
+          <div class="sidebar-widget">
+            <div class="boxed-widget summary margin-top-0">
+              <!-- <div class="boxed-widget-headline">
+                <h3>Summary</h3>
+              </div> -->
+              <div class="boxed-widget-inner" *ngIf="question">
+                <ul>
+                  <li>Author <span>John</span></li>
+                  <li>Difficulty <span>Easy</span></li>
+                  <li>
+                    Max-score<span>{{ question.max_score }}%</span>
+                  </li>
+                  <li>Submitted By<span>88990</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--row end-->
+  </div>
+  <!--container-->
+</div>
+<!--bg-container end-->

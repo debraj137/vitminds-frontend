@@ -1,0 +1,180 @@
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth" [class]="customClass">
+  <!-- Header -->
+  <div id="header">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <!-- Logo -->
+        <div id="logo">
+          <a [routerLink]="['']"><img src="/assets/images/logo.png" alt=""/></a>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav id="navigation">
+          <ul id="responsive">
+            <li>
+              <a [routerLink]="['']" class="current">Homes</a>
+              <!-- <ul class="dropdown-nav">
+                <li><a href="index.html">Home 1</a></li>
+                <li><a href="index-2.html">Home 2</a></li>
+                <li><a href="index-3.html">Home 3</a></li>
+              </ul> -->
+            </li>
+
+            <li *ngIf="isLoggedIn">
+              <a [routerLink]="['/user/dashboard']">Dashboard</a>
+              <ul class="dropdown-nav">
+                <li><a [routerLink]="['/user/dashboard']">Dashboard</a></li>
+
+                <!-- <li>
+                  <a href="dashboard-manage-tasks.html">Problems</a>
+                  <ul class="dropdown-nav">
+                    <li>
+                      <a href="dashboard-manage-tasks.html">Manage Problems</a>
+                    </li>
+                    <li>
+                      <a href="dashboard-post-a-task.html">Post a query</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="dashboard.html">Forums</a></li>
+                <li><a href="dashboard-settings.html">Settings</a></li> -->
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <!-- Main Navigation / End -->
+      </div>
+      <!-- Left Side Content / End -->
+
+      <!-- Right Side Content / End -->
+      <div class="right-side">
+        <!--  User Notifications / End -->
+
+        <!-- User Menu -->
+        <div class="header-widget">
+          <!-- Not LoggeIn -->
+          <a
+            *ngIf="!isLoggedIn"
+            [routerLink]="['/auth/login']"
+            class="popup-with-zoom-anim log-in-button"
+            ><i class="icon-feather-log-in"></i>
+            <span>Log In / Register</span></a
+          >
+          <!-- LoggeIn -->
+          <div
+            *ngIf="isLoggedIn"
+            class="header-notifications user-menu"
+            [ngClass]="userMenuStatue ? 'active' : ''"
+          >
+            <div class="header-notifications-trigger">
+              <a href="#" (click)="handleUserMenuTrigger($event)">
+                <div
+                  class="user-avatar status-online"
+                  [ngStyle]="{
+                    'background-image':
+                      'url(' +
+                      imageBaseUrl +
+                      user.primaryImageUrl +
+                      '/' +
+                      getUrlEncoded(user.fileName) +
+                      ')'
+                  }"
+                >
+                  <img
+                    onError="this.src='/assets/images/user_default2.png'"
+                    alt=""
+                  />
+                </div>
+                {{ user.firstName }}
+              </a>
+            </div>
+
+            <!-- Dropdown -->
+            <div class="header-notifications-dropdown" *ngIf="isLoggedIn">
+              <!-- User Status -->
+              <div class="user-status">
+                <!-- User Name / Avatar -->
+                <div class="user-details">
+                  <div
+                    class="user-avatar status-online"
+                    [ngStyle]="{
+                      'background-image':
+                        'url(' +
+                        imageBaseUrl +
+                        user.primaryImageUrl +
+                        '/' +
+                        getUrlEncoded(user.fileName) +
+                        ')'
+                    }"
+                  >
+                    <img
+                      onError="this.src='/assets/images/user_default2.png'"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ user.firstName }}
+                    <!-- <span>Freelancer</span> -->
+                  </div>
+                </div>
+                <!-- User Status Switcher -->
+                <!-- <div class="status-switch" id="snackbar-user-status">
+                  <label class="user-online current-status">Online</label>
+                  <label class="user-invisible">Invisible</label>
+                  <span class="status-indicator" aria-hidden="true"></span>
+                </div> -->
+              </div>
+
+              <ul class="user-menu-small-nav">
+                <li>
+                  <a [routerLink]="['/user/dashboard']"
+                    ><i class="icon-material-outline-dashboard"></i>
+                    Dashboard</a
+                  >
+                </li>
+                <li>
+                  <a
+                    [routerLink]="['/user/code-playground']"
+                    class="dropdown-nav"
+                  >
+                    <i class="icon-material-outline-code"></i> Code
+                    Playground</a
+                  >
+                </li>
+                <li>
+                  <a [routerLink]="['/user/profile']">
+                    <i class="icon-material-outline-settings"></i> Settings</a
+                  >
+                </li>
+                <li>
+                  <a (click)="logoutEndUser()" class="hvr"
+                    ><i class="icon-material-outline-power-settings-new"></i>
+                    Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- User Menu / End -->
+
+        <!-- Mobile Navigation Button -->
+        <span class="mmenu-trigger">
+          <button class="hamburger hamburger--collapse" type="button">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </span>
+      </div>
+      <!-- Right Side Content / End -->
+    </div>
+  </div>
+  <!-- Header / End -->
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->

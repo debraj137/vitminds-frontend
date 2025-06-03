@@ -1,0 +1,105 @@
+<!-- <form [formGroup]="form"> -->
+<div class="btnList">
+  <button (click)="back()" class="btn btn-primary btn-sm testcase">
+    Back
+  </button>
+  <!-- <button (click)="removeTestCase()" class="btn btn-primary btn-sm testcase">
+    Remove
+  </button> -->
+  <!-- </div> -->
+  <button
+    type="button"
+    class="btn btn-primary btn-sm testcase"
+    (click)="addMore()"
+  >
+    Add More
+  </button>
+  <button (click)="saveTestCase()" class="btn btn-primary btn-sm testcase">
+    Submit
+  </button>
+</div>
+
+<!-- <div [formGroupName]="i"> -->
+
+<!-- <div *ngFor="let item of items.control; let i = index"> -->
+<div class=" col-md-10 form-inner" *ngFor="let i of counts; let index = index">
+  <div class="removeBtn">
+    Test Case {{ index + 1 }}
+    <span>
+      <button
+        (click)="removeTestCase(index)"
+        class="btn btn-primary btn-sm testcase"
+      >
+        Remove
+      </button>
+    </span>
+  </div>
+  <div class="col-md-10 form-group textarea">
+    <label>Add Input</label>
+    <textarea class="form-control" [(ngModel)]="input[index]" rows="5">
+    </textarea>
+  </div>
+
+  <div class="col-md-10">
+    <input
+      type="text"
+      class="with-border"
+      [(ngModel)]="output[index]"
+      [name]="name"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Output"
+    />
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<!-- <div class="col-md-10">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="testCaseInputs[0].input"
+          [name]="name"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="1. Input"
+        />
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="testCaseInputs[1].input"
+          [name]="name"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="2. Input"
+        />
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="testCaseInputs[2].input"
+          [name]="name"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="3. Input"
+        />
+      </div>
+      <div class="clearfix"></div>
+
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="output"
+          [name]="name"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Output"
+        />
+      </div>
+      <div class="clearfix"></div> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </form> -->

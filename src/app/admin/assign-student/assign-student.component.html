@@ -1,0 +1,137 @@
+<div class="dashboard-content-container" *ngIf="!editFlag">
+  <div class="dashboard-content-inner">
+    <!-- <div class="dashboard-headline"> -->
+    <!-- <h3>Subject List</h3> -->
+    <!-- Row -->
+    <div class="dashboard-headline">
+      <h3>Assigned Students</h3>
+
+      <!-- Breadcrumbs -->
+
+      <nav id="breadcrumbs" class="dark admin-add-btn">
+        <ul class="">
+          <li>
+            <button
+              class="btn btn-primary btn-sm floats-right"
+              type="button"
+              (click)="back()"
+            >
+              Back
+            </button>
+          </li>
+          <li>
+            <button
+              class="btn btn-primary btn-sm floats-right"
+              type="button"
+              (click)="addStudent()"
+            >
+              Add
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="row">
+      <!-- Dashboard Box -->
+      <div class="col-xl-12">
+        <div class="dashboard-box" *ngIf="!addFlag">
+          <div class="headline">
+            <h3><i class="icon-feather-folder-plus"></i>Assigned Students</h3>
+
+            <!-- Breadcrumbs -->
+            <div class="submit-field margin-bottom-0">
+              <input
+                [(ngModel)]="searchText"
+                placeholder="Search student..."
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let student of assigned_student_list
+                    | grdFilter
+                      : {
+                          firstName: searchText,
+                          seccondName: searchText,
+                          email: searchText
+                        };
+                  let i = index
+                "
+              >
+                <td>{{ i + 1 }}</td>
+                <td>{{ student.firstName }} {{ student.seccondName }}</td>
+                <td>{{ student.email }}</td>
+                <td>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="removeStudentFromBatch(student)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-box" *ngIf="addFlag">
+          <!-- Headline -->
+
+          <div class="headline">
+            <button
+              class="btn btn-primary btn-sm floats-right"
+              (click)="backTo()"
+            >
+              Back
+            </button>
+            <h5><i class="icon-feather-folder-plus"></i>Add Students</h5>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- <th>ID</th> -->
+                <th>Name</th>
+                <th>Email</th>
+                <th>Assign</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of studentlist">
+                <!-- <td>{{ student.userId }}</td> -->
+                <td>{{ student.firstName }} {{ student.seccondName }}</td>
+                <!-- <td>abc@gmail.com</td> -->
+                <td>{{ student.email }}</td>
+                <td class="checkbox-input">
+                  <input
+                    type="checkbox"
+                    class="with-border"
+                    (click)="checkMapFun(student.userId)"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary btn-sm" (click)="assignedStudent()">
+            Assign
+          </button>
+        </div>
+
+        <!-- Dashboard Content / End -->
+      </div>
+      <!-- Dashboard Container / End -->
+    </div>
+  </div>
+</div>

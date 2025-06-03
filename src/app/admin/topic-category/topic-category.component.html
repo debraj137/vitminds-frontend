@@ -1,0 +1,171 @@
+<!-- Dashboard Sidebar / End -->
+
+<!-- Dashboard Content
+      ================================================== -->
+<!-- <div class="dashboard-content-container" data-simplebar> -->
+
+<!-- testing ngx start -->
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Topic Categories</h3>
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="addCategory()"
+          >
+            Add category <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box">
+        <!-- Headline -->
+        <div class="headline">
+          <h5><i class="icon-feather-folder-plus"></i> Topic Category</h5>
+
+          <!-- <div class="row">
+              <div class="submit-field col-xl-6">
+                <input type="text" class="with-border" [(ngModel)]="categoryName" placeholder="add category"
+                  [class.brdr]="submitted && !categoryName" />
+              </div>
+              <div class="submit-field col-xl-6">
+                <button type="button" class="button" (click)="saveCategory()">
+                  Save
+                </button>
+              </div>
+            </div> -->
+
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search course..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Id</th> -->
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let category of listOfTopicCategory">
+              <!-- <td>{{ category.id }}</td> -->
+              <td>{{ category.name }}</td>
+              <td>
+                <!-- <button class="btn btn-primary" (click)="ngOnDelete(category)">
+                        Delete
+                      </button> -->
+                <!-- <span class="delete-ico">
+                  <i data-toggle="tooltip" data-placement="top" title="Delete" class="icon-line-awesome-trash-o"
+                    (click)="deleteCategory(category)"></i>
+                </span> -->
+
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  style="font-size: 20px;"
+                  (click)="editCategory(category)"
+                >
+                </i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+
+    <!--Pop Up Box for Subject-->
+    <div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+      <!--Tabs -->
+      <div class="sign-in-form">
+        <ul class="popup-tabs-nav">
+          <div class="popup-title">
+            <h4>Add Category</h4>
+          </div>
+        </ul>
+
+        <div class="popup-tabs-container">
+          <!-- Tab -->
+          <div class="popup-tab-content" id="tab1">
+            <div class="content with-padding padding-bottom-10">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="submit-field">
+                    <h5>Name<em>*</em></h5>
+                    <input type="text" class="with-border" value="Tom" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <a
+                  href="#"
+                  class="button small col-xl-3 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-cancel"></i> Cancel</a
+                >
+                <a
+                  href="#"
+                  class="button small col-xl-3 offset-xl-6 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-sa"></i> Save</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Content / End -->
+  </div>
+  <!-- Dashboard Container / End -->
+</div>
+<!-- </div> -->
+
+<ngx-smart-modal #myModal identifier="myModal" class="margin-top-100">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add Topic Category</h3>
+  </div>
+
+  <!-- Form -->
+  <div class="submit-field">
+    <input
+      type="text"
+      class="with-border"
+      [(ngModel)]="categoryName"
+      placeholder="add category"
+      [class.brdr]="submitted && !categoryName"
+    />
+  </div>
+  <!-- Button -->
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveCategory()"
+  >
+    Save <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+<!-- testing ngx end -->

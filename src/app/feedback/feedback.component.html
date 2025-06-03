@@ -1,0 +1,171 @@
+<div class="section margin-top-10">
+  <div class="container">
+    <div class="row  bottom_margin">
+      <div class="col-xl-10 offset-xl-2 feedback">
+        <h5 class="headline margin-top-15 margin-bottom-10">
+          Share your feedback with us!
+        </h5>
+        <div class="row">
+          <div class="col-xl-12 col-md-12 margin-bottom-40">
+            <table class="basic-table">
+              <tbody>
+                <tr>
+                  <th>Atribute</th>
+                  <th>Poor</th>
+                  <th>Average</th>
+                  <th>Good</th>
+                  <th>Very Good</th>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1"><b>Technical</b></td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="technical" [(ngModel)]="feedback.technical" value="poor" type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="technical" [(ngModel)]="feedback.technical" value="average"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="technical" [(ngModel)]="feedback.technical" value="good" type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="technical" [(ngModel)]="feedback.technical" value="verygood"
+                      type="radio" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1"><b>Communication</b></td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="communication" [(ngModel)]="feedback.communication" value="poor"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="communication" [(ngModel)]="feedback.communication" value="average"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="communication" [(ngModel)]="feedback.communication" value="good"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="communication" [(ngModel)]="feedback.communication" value="verygood"
+                      type="radio" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1"><b>Aptitude</b></td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="aptitude" [(ngModel)]="feedback.aptitude" value="poor" type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="aptitude" [(ngModel)]="feedback.aptitude" value="average" type="radio" />
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="aptitude" [(ngModel)]="feedback.aptitude" value="good" type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="aptitude" [(ngModel)]="feedback.aptitude" value="verygood" type="radio" />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td data-label="Column 1">
+                    <b>Was trainer able to clear your doubt ?</b>
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="cleared_your_doubt" [(ngModel)]="feedback.cleared_your_doubt" value="poor"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="cleared_your_doubt" [(ngModel)]="feedback.cleared_your_doubt"
+                      value="average" type="radio" />
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="cleared_your_doubt" [(ngModel)]="feedback.cleared_your_doubt" value="good"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="cleared_your_doubt" [(ngModel)]="feedback.cleared_your_doubt"
+                      value="verygood" type="radio" />
+                  </td>
+                </tr>
+                <tr>
+                  <td data-label="Column 1">
+                    <b>Was trainer able to explain the concept effectively ?</b>
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="explained_concept" [(ngModel)]="feedback.explained_concept" value="poor"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="explained_concept" [(ngModel)]="feedback.explained_concept"
+                      value="average" type="radio" />
+                  </td>
+                  <td data-label="Column 2">
+                    <input id="radio-1" name="explained_concept" [(ngModel)]="feedback.explained_concept" value="good"
+                      type="radio" />
+                  </td>
+                  <td data-label="Column 3">
+                    <input id="radio-1" name="explained_concept" [(ngModel)]="feedback.explained_concept"
+                      value="verygood" type="radio" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <select [(ngModel)]="feedback.trainer.userId" class="trainer-cls">
+            <option value="undefined" disabled>select trainer</option>
+            <option value="{{t.userId}}" *ngFor="let t of trainerlist">{{t.firstName}} {{t.seccondName}}</option>
+          </select>
+          <!-- <div class="col-md-6">
+            <div class="input-with-icon-left">
+              <input
+                type="text"
+                id="namee"
+                placeholder="Your Name"
+                required="required"
+                [(ngModel)]="feedback.name"
+                value=""
+              />
+              <i class="icon-material-outline-account-circle"></i>
+            </div>
+          </div> -->
+
+          <!-- <div class="col-md-6">
+            <div class="input-with-icon-left">
+              <input
+                class="with-border"
+                name="email"
+                type="email"
+                id="email"
+                [(ngModel)]="feedback.email"
+                value=""
+                placeholder="Email Address"
+                pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
+                required="required"
+              />
+              <i class="icon-material-outline-email"></i>
+            </div>
+          </div> -->
+        </div>
+
+        <div>
+          <textarea class="with-border" name="comments" cols="40" rows="5" id="comments" [(ngModel)]="feedback.message"
+            placeholder="Message" spellcheck="true" required="required"></textarea>
+        </div>
+
+        <input type="submit" class="submit button btn_margin" id="submit" (click)="saveFeedback()" value="Submit" />
+
+        <div class="checkbox">
+          <label>
+            <span><input type="text" class="with-border" /></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

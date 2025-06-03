@@ -1,0 +1,225 @@
+<!-- Dashboard Content
+      ================================================== -->
+
+<!-- testing ngx start -->
+<!-- testing ngx end -->
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Courses</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="addCourse()"
+          >
+            Add Course <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <!-- Headline -->
+        <div class="headline">
+          <h3 class="margin-bottom-0">
+            <i class="icon-feather-folder-plus"></i> Course List
+          </h3>
+
+          <div class="submit-field margin-bottom-0">
+            <select
+              class="form-control sortBySub"
+              id="subject"
+              (change)="sortBySubject($event)"
+              [(ngModel)]="subjectId"
+            >
+              <option value="undefined" disabled>Sort By Subject</option>
+              <option value="All">All</option>
+              <option value="{{ sub.id }}" *ngFor="let sub of subjectlist">{{
+                sub.name
+              }}</option>
+            </select>
+          </div>
+
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search course..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Index</th> -->
+              <th scope="col">Name</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Course Fee</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let course of listOfCourse">
+              <!-- <td>{{ i + 1 }}</td> -->
+              <td>{{ course.name }}</td>
+              <td>{{ course.subject.name }}</td>
+              <td>{{ course.fees }}</td>
+              <td>
+                <!-- <button class="btn btn-primary" (click)="delete(course)">
+                      Delete
+                    </button> -->
+                <span class="delete-ico">
+                  <i
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete"
+                    class="icon-line-awesome-trash-o"
+                    (click)="confirmModel(course)"
+                  ></i>
+                </span>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  style="font-size: 20px;"
+                  (click)="editCourse(course)"
+                >
+                </i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+
+    <!--Pop Up Box for Subject-->
+    <div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+      <!--Tabs -->
+      <div class="sign-in-form">
+        <ul class="popup-tabs-nav">
+          <div class="popup-title">
+            <h4>Add Subject</h4>
+          </div>
+        </ul>
+
+        <div class="popup-tabs-container">
+          <!-- Tab -->
+          <div class="popup-tab-content" id="tab1">
+            <div class="content with-padding padding-bottom-10">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="submit-field">
+                    <h5>Name<em>*</em></h5>
+                    <input type="text" class="with-border" value="Tom" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <a
+                  href="#"
+                  class="button small col-xl-3 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-cancel"></i> Cancel</a
+                >
+                <a
+                  href="#"
+                  class="button small col-xl-3 offset-xl-6 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-sa"></i> Save</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Content / End -->
+  </div>
+  <!-- Dashboard Container / End -->
+</div>
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New Course</h3>
+  </div>
+
+  <!-- Form -->
+  <div class="submit-field">
+    <h5>Select Subject</h5>
+    <select
+      class=""
+      [(ngModel)]="course.subject.id"
+      [class.brdr]="submitted && !course.subject.id"
+    >
+      <option [ngValue]="undefined" disabled>select subject</option>
+      <option *ngFor="let sub of subjectlist" value="{{ sub.id }}">{{
+        sub.name
+      }}</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <h5>Course Name<em>*</em></h5>
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="course.name"
+          placeholder="course name"
+          [class.bdr-red]="submitted && !course.name"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <h5>Course Fee<em>*</em></h5>
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="course.fees"
+          placeholder="course fee"
+          [class.bdr-red]="submitted && !course.fees"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-field">
+    <h5>Description<em>*</em></h5>
+    <textarea
+      cols="30"
+      rows="3"
+      [(ngModel)]="course.description"
+      class="with-border"
+      [class.bdr-red]="submitted && !course.description"
+      placeholder=""
+    ></textarea>
+  </div>
+  <!-- Button -->
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveCourse()"
+  >
+    Save Course <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>

@@ -1,0 +1,116 @@
+<!-- Dashboard Content
+      ================================================== -->
+
+<ngx-smart-modal #myTokenModal identifier="myTokenModal">
+  <!-- <div class="modal">
+    <h1 class="modal-header">Exam Token</h1>
+    <form> -->
+  <!-- </div> -->
+  <div class="examToken-text">
+    <!-- <h3></h3> -->
+  </div>
+  <div class="content with-padding padding-bottom-10">
+    <div class="submit-field">
+      <h5>Exam Token<em>*</em></h5>
+      <input
+        type="text"
+        id="token"
+        [(ngModel)]="examToken"
+        placeholder="Enter Valid Exam Token"
+        class="with-border"
+      />
+    </div>
+
+    <a (click)="validateExamToken()" class="button small margin-top-30 f-r"
+      >Continue</a
+    >
+  </div>
+
+  <!-- </form> -->
+  <!-- </div> -->
+</ngx-smart-modal>
+
+<div class="dashboard-content-container" data-simplebar>
+  <!-- testing ngx end -->
+  <div class="dashboard-content-inner" *ngIf="!editFlag">
+    <div class="dashboard-headline exam-lists">
+      <h3>Exams</h3>
+      <!-- Row -->
+      <div class="row">
+        <!-- Dashboard Box -->
+        <div class="col-xl-12">
+          <div class="dashboard-box margin-top-0">
+            <!-- Headline -->
+            <div class="headline">
+              <h3 class="margin-bottom-0">
+                <i class="icon-feather-folder-plus"></i> Exam List
+              </h3>
+              <div class="submit-field margin-bottom-0">
+                <input
+                  [(ngModel)]="searchText"
+                  placeholder="Search exam..."
+                  class="form-control"
+                />
+              </div>
+            </div>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th style="width: 240px;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let course of items
+                      | grdFilter
+                        : {
+                            name: searchText
+                          };
+                    let i = index
+                  "
+                >
+                  <td>{{ course.id }}</td>
+                  <td>{{ course.name }}</td>
+                  <td>
+                    <!-- <button class="btn btn-primary" (click)="edit(course)">
+                      Edit
+                    </button> -->
+
+                    <!-- <button class="btn btn-primary" (click)="delete(course)">
+                      Delete
+                    </button> -->
+                    <!-- <span class="delete-ico">
+                      <i class="icon-line-awesome-trash-o"></i>
+                    </span> -->
+                    <!-- <button
+                      class="btn btn-primary"
+                      (click)="assignQuestion(course)"
+                    >
+                      assign Q
+                    </button> -->
+                    <button
+                      class="action-btn btn btn-primary btn-sm"
+                      [routerLink]="['/user/exam_result/' + course.id]"
+                    >
+                      View Result
+                    </button>
+                    <button
+                      class="action-btn btn btn-primary btn-sm"
+                      (click)="getExamIdOnClick(course.id, course.examToken)"
+                    >
+                      Attend Exam
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

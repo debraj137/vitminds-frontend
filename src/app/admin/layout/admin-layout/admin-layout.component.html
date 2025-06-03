@@ -1,0 +1,18 @@
+<div id="wrapper">
+  <app-header
+    [customClass]="'fullwidth dashboard-header not-sticky'"
+  ></app-header>
+  <div class="dashboard-container">
+    <app-admin-sidemenu
+      *ngIf="!isTrainer"
+      class="dashboard-sidebar"
+    ></app-admin-sidemenu>
+    <app-trainer-sidemenu
+      *ngIf="isTrainer"
+      class="dashboard-sidebar"
+    ></app-trainer-sidemenu>
+    <div class="dashboard-content-container" data-simplebar>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

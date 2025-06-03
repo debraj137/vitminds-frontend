@@ -1,0 +1,120 @@
+<div class="dashboard-content-container" *ngIf="!editFlag" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- <div class="dashboard-headline"> -->
+    <!-- <h3>Subject List</h3> -->
+    <!-- Row -->
+    <div class="row">
+      <!-- Dashboard Box -->
+      <div class="col-xl-12">
+        <div class="dashboard-box" *ngIf="!addFlag">
+          <!-- Headline -->
+          <div class="headline">
+            <h5>
+              <i class="icon-feather-folder-plus"></i>Previous Assigned
+              Exams
+              <button class="btn btn-primary btn-sm floats-right" type="button" (click)="addExams()">
+                Add
+              </button>
+            </h5>
+            <br />
+            <input [(ngModel)]="searchText" placeholder="Search question.." class="form-control" />
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of items; let i = index">
+                <td>{{ course.id }}</td>
+                <td>{{ course.question }}</td>
+                <td>{{ course.marks }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm margin-right-5">
+                    Edit
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    Delete
+                  </button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-box" *ngIf="addFlag">
+          <!-- Headline -->
+          <div class="headline" *ngIf="!studentFlag">
+            <h5><i class="icon-feather-folder-plus"></i> add Exam</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Code</th>
+                  <th>Assign</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let batch of batchlist">
+                  <td>{{ batch.id }}</td>
+                  <td>{{ batch.batchName }}</td>
+                  <td>{{ batch.batchCode }}</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm" (click)="assignFun(batch)">
+                      assign
+                    </button>
+                    <!-- <input type="checkbox" class="with-border" (click)="checkMapFun(batch.id)" /> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <button class="btn btn-primary btn-sm" (click)="assignedExams()">
+              assign
+            </button> -->
+          </div>
+          <div class="dashboard-box" *ngIf="studentFlag">
+            <div class="headline row">
+              <h5 class="col-md-12"><i class="icon-feather-folder-plus "></i> select Student</h5>
+              <table class="table col-md-12">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Assign</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of batch_student_list">
+                    <td>{{ student.userId }}</td>
+                    <td>{{ student.firstName }} {{ student.seccondName }}</td>
+                    <td>{{ student.email }}</td>
+                   <!--  <td class="checkbox-input">
+                      <input type="checkbox" class="with-border" (click)="checkMapFun(student.userId)" />
+                    </td> -->
+                    <td class="checkbox-input">
+                      <input type="checkbox" class="with-border" (click)="checkMapFun(student.userId)" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-primary btn-sm" (click)="examAssigntoStudent()">
+                assign
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Content / End -->
+      </div>
+      <!-- Dashboard Container / End -->
+    </div>
+  </div>
+</div>

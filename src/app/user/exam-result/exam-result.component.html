@@ -1,0 +1,155 @@
+<div class="dashboard-content-container" data-simplebar>
+  <!-- testing ngx end -->
+  <div class="dashboard-content-inner" *ngIf="!editFlag">
+    <div class="dashboard-headline">
+      <h3>Test Summary</h3>
+      <!-- Row -->
+      <div class="row">
+        <!-- Dashboard Box -->
+        <div class="col-xl-12">
+          <div class="dashboard-box">
+            <!-- Headline -->
+            <!-- <div class="headline">
+              <h3 class="margin-bottom-0">
+                <i class="icon-feather-folder-plus"></i> Test Summery
+              </h3>
+              <div class="submit-field margin-bottom-0">
+                <input
+                  [(ngModel)]="searchText"
+                  placeholder="Search exam..."
+                  class="form-control"
+                />
+              </div>
+            </div> -->
+
+            <div class="exam-result">
+              <div class="boxed-widget summary margin-top-0">
+                <!-- <div class="boxed-widget-headline">
+                  <h3>Test Summary</h3>
+                </div> -->
+                <div class="boxed-widget-inner">
+                  <ul>
+                    <li>
+                      Total Questions: <span>{{ totalAssignedQuesCount }}</span>
+                    </li>
+                    <li>
+                      Attended Questions: <span>{{ attendedQuesCount }}</span>
+                    </li>
+                    <li>
+                      Correct Answered: <span>{{ correctAnsCount }}</span>
+                    </li>
+                    <li class="total-costs">
+                      Total Marks: <span>{{ examMarks }}</span>
+                    </li>
+                    <li>
+                      You Scored: <span>{{ totalScore }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- <app-question [type]="'summery'"></app-question> -->
+              <div *ngFor="let examAns of examQuestionAnswers; let i = index">
+                <div class="question-content__title">
+                  <span class="question-content__number">
+                    Question {{ i + 1 }}
+                  </span>
+                  <span class="question-content__mark">
+                    Max. Marks {{ examAns.question.max_score }}
+                  </span>
+                </div>
+
+                <div class="question-content__question">
+                  {{ examAns.question.name }}
+                </div>
+
+                <!-- <div class="question-content__question question-content__question--code">
+                <code>
+                  const a = "lol";
+                </code>
+              </div> -->
+
+                <div
+                  *ngIf="
+                    examQuestionAnswers != null &&
+                    examAns.question.options.length > 0
+                  "
+                  class="question-content__options"
+                >
+                  <div
+                    *ngFor="
+                      let options of examAns.question.options;
+                      let i = index
+                    "
+                    class="radio"
+                    [class.radio--correct]="
+                      correctans[examAns.question.id] == options.id
+                    "
+                    [class.radio--wrong]="options.id == examAns.answer"
+                  >
+                    <input id="radio-{{ i }}" name="radio" type="radio" />
+                    <label for="radio-{{ i }}"
+                      ><span *ngIf="type === ''" class="radio-label"></span>
+                      {{ options.name }}</label
+                    >
+                  </div>
+
+                  <br />
+                </div>
+                <!-- </div> -->
+                <!-- <div class="radio" [class.radio--correct]="type === 'summery'">
+                  <input id="radio-2" name="radio" type="radio" />
+                  <label for="radio-2"
+                    ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+                  >
+                </div>
+              
+                <br />
+              
+                <div class="radio">
+                  <input id="radio-3" name="radio" type="radio" checked />
+                  <label for="radio-3"
+                    ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+                  >
+                </div>
+              
+                <br />
+              
+                <div class="radio">
+                  <input id="radio-4" name="radio" type="radio" />
+                  <label for="radio-4"
+                    ><span *ngIf="type === ''" class="radio-label"></span> Radio Button</label
+                  >
+                </div>
+              </div> -->
+
+                <!-- <div *ngIf="type === ''" class="question-content__buttons">
+                <button href="#" class="button ripple-effect">Submit</button>
+                <span class="info">
+                  Don't forgot to submit your answer.
+                </span>
+              </div> -->
+
+                <div
+                  *ngIf="
+                    examQuestionAnswers != null && examAns.question.description
+                  "
+                  class="question-content__explanation"
+                >
+                  <h5 class="question-content__explanation-title">
+                    Explanation:
+                  </h5>
+                  <p class="question-content__explanation-detail">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Vero, incidunt nobis tempore soluta illum explicabo, nam
+                    ullam laudantium et, odio quis impedit veritatis ad.
+                    Quisquam reprehenderit tempore aperiam omnis veniam.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

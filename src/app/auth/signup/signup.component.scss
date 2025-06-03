@@ -1,0 +1,56 @@
+.name-type {
+    display: flex;
+    margin-bottom: 10px;
+
+    .input-name {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width:600px) {
+    .name-type {
+        display: block;
+
+        .input-name {
+            margin-right: 0px;
+        }
+    }
+}
+
+.succ {
+    text-align: center;
+    margin: 200px;
+}
+
+.grn {
+    color: greenyellow
+}
+
+
+.main_div { 
+   
+    position: relative; 
+    height: 75px; 
+    width: 500px; 
+   
+} 
+.otpmsg { 
+    position: absolute; 
+    bottom: 0px; 
+   color: darkorange; 
+    font-size: 1.1em;
+} 
+p { 
+    margin-left:110px; 
+} 
+.bdr-red {
+    border-color: red !important;
+}
+.brdr {
+    //  border: none;
+    border: 0;
+    outline: 1px solid red;
+    border-radius: 4px !important;
+}
+  
+  

@@ -1,0 +1,254 @@
+<ngx-smart-modal #myModal identifier="myModal">
+  <div class="welcome-text">
+    <h3>Add New Student</h3>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="student.firstName"
+          placeholder="First name"
+          [class.bdr-red]="submitted && !student.firstName"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="student.seccondName"
+          placeholder="Last name"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <select
+          class="with-border"
+          [(ngModel)]="student.college.id"
+          [class.bdr-red]="submitted && !student.college.id"
+        >
+          <option [ngValue]="undefined" disabled>Select college</option>
+          <option *ngFor="let college of collegeList" value="{{ college.id }}">
+            {{ college.collegeName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="student.degree"
+          placeholder="Stream"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="student.branch"
+          placeholder="Branch"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          name="email"
+          #contactemail="ngModel"
+          class="with-border"
+          [(ngModel)]="student.email"
+          placeholder="Enter email"
+          [class.bdr-red]="submitted && !student.email"
+          required
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        />
+        <div
+          class="md-errors-spacer"
+          [hidden]="contactemail.valid || contactemail.untouched"
+        >
+          <!--  <div *ngIf="contactemail.errors && contactemail.errors.required">
+            Email is required
+          </div> -->
+          <!--  <div *ngIf="contactemail.errors && contactemail.errors.pattern">
+            Email is invalid
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="password"
+          class="with-border"
+          [(ngModel)]="student.adminLoginMaster.password"
+          [class.brdr]="submitted && !student.adminLoginMaster.password"
+          placeholder="Enter password"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div>
+        <input
+          type="number"
+          class="with-border"
+          [(ngModel)]="student.mobileNumber"
+          placeholder="Mobile number"
+          [class.bdr-red]="submitted && !student.mobileNumber"
+        />
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveStudent()"
+  >
+    Save Student <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+
+<!-- ================================================================== -->
+
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Students</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add Student <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <!-- Headline -->
+        <div class="headline">
+          <h3 class="margin-bottom-0">
+            <i class="icon-feather-folder-plus"></i> Student List
+          </h3>
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search student..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Index</th> -->
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">College</th>
+              <th scope="col">Stream</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- create pipe to filter -->
+            <tr scope="row" *ngFor="let student of listOfStudent">
+              <!-- <td>{{ i + 1 }}</td> -->
+              <td>{{ student.firstName }}</td>
+              <td>{{ student.seccondName }}</td>
+              <td>{{ student.college?.collegeName }}</td>
+              <td>{{ student.degree }}</td>
+              <td>{{ student.email }}</td>
+              <td>{{ student.mobileNumber }}</td>
+              <td>
+                <p *ngIf="student.active">Approved</p>
+                <p *ngIf="student.enrolled">Enrolled</p>
+                <p *ngIf="!student.active">Unapproved</p>
+              </td>
+              <!-- <td *ngIf="!student.active">Unapproved</td> -->
+              <td>
+                <!-- <span class="delete-ico">
+                  <i
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete"
+                    class="icon-line-awesome-trash-o"
+                    (click)="deleteStudent(student)"
+                  ></i>
+                </span> -->
+                <button
+                  class="btn btn-primary btn-sm btn-action"
+                  (click)="chnageStatus(student.userId)"
+                  *ngIf="!student.active"
+                >
+                  Approve
+                </button>
+                <button
+                  class="btn btn-primary btn-sm btn-action"
+                  (click)="chnageStatus(student.userId)"
+                  *ngIf="student.active"
+                >
+                  Unapprove
+                </button>
+
+                <!-- <button
+                  class="btn btn-primary btn-sm btn-action"
+                  (click)="enrollStudent(student.userId)"
+                  *ngIf="!student.enrolled"
+                >
+                  Enroll
+                </button> -->
+                <!-- <button
+                  class="btn btn-primary btn-sm btn-action"
+                  (click)="updateInvoice(student.userId)"
+                  *ngIf="student.enrolled"
+                >
+                  Update Invoice
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

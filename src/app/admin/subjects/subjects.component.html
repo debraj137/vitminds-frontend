@@ -1,0 +1,121 @@
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New Subject</h3>
+  </div>
+
+  <!-- Form -->
+  <div class="submit-field">
+    <input
+      type="text"
+      class="with-border"
+      [(ngModel)]="subject"
+      placeholder="Enter subject"
+      [class.brdr]="submitted && !subject"
+    />
+  </div>
+  <!-- Button -->
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveSubject()"
+  >
+    Save Subject <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+<!-- testing ngx end -->
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Subjects</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="addSubject()"
+          >
+            Add Subject <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <!-- Headline -->
+        <div class="headline">
+          <h3 class="margin-bottom-0">
+            <i class="icon-feather-folder-plus"></i> Subject List
+          </h3>
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search subject..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Index</th> -->
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let sub of listOfSubject">
+              <!-- <td>{{ i + 1 }}</td> -->
+              <td>{{ sub.name }}</td>
+              <td>
+                <!-- <button class="btn btn-primary" (click)="delete(sub)"> -->
+                <span class="delete-ico btn-action">
+                  <i
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete"
+                    class="icon-line-awesome-trash-o"
+                    (click)="confirmModel(sub)"
+                  ></i>
+                </span>
+                <!-- </button> -->
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  style="font-size: 20px;"
+                  (click)="editSubject(sub)"
+                >
+                </i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+
+    <!--Pop Up Box for Subject-->
+
+    <!-- Dashboard Content / End -->
+  </div>
+  <!-- Dashboard Container / End -->
+</div>

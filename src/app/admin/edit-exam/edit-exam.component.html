@@ -1,0 +1,149 @@
+<!-- Dashboard Content
+                  ================================================== -->
+<div class="dashboard-content-container" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- Dashboard Headline -->
+    <div class="dashboard-headline"></div>
+
+    <!-- Row -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="col-xl-6 offset-xl-3">
+          <div class="dashboard-box">
+            <!-- Headline -->
+            <div class="headline">
+              <h5>
+                <i class="icon-feather-folder-plus"></i> update Exam
+                <span
+                  ><a class="add-btn"
+                    ><i class="icon-material-outline-add"></i></a
+                ></span>
+              </h5>
+            </div>
+            <div class="content with-padding padding-bottom-10" *ngIf="exam">
+              <div class="submit-field">
+                <h5>Exam name<em>*</em></h5>
+                <input
+                  type="text"
+                  class="with-border"
+                  [(ngModel)]="exam.name"
+                  placeholder="exam name"
+                />
+              </div>
+
+              <div class="submit-field">
+                <h5>Select course<em>*</em></h5>
+                <select [(ngModel)]="exam.course.id">
+                  <option [ngValue]="undefined" disabled>select course</option>
+                  <option *ngFor="let sub of items" value="{{ sub.id }}">{{
+                    sub.name
+                  }}</option>
+                </select>
+              </div>
+
+              <div class="submit-field">
+                <h5>Select Batch<em>*</em></h5>
+                <select [(ngModel)]="exam.batch.id">
+                  <option [ngValue]="undefined" disabled>select batch</option>
+                  <option
+                    *ngFor="let batch of batchList"
+                    value="{{ batch.id }}"
+                    >{{ batch.batchName }}</option
+                  >
+                </select>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="submit-field">
+                    <h5>Exam date<em>*</em></h5>
+
+                    <input
+                      class="input is-rounded is-small"
+                      [owlDateTime]="dt2"
+                      [owlDateTimeTrigger]="dt2"
+                      [(ngModel)]="exam.date"
+                      placeholder="From"
+                      class="with-border"
+                      id="examDate"
+                    />
+                    <owl-date-time
+                      [pickerType]="'calendar'"
+                      #dt2
+                    ></owl-date-time>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="submit-field">
+                    <h5>exam time<em>*</em></h5>
+                    <!--  <input type="time" class="with-border" [(ngModel)]="exam.startTime" placeholder="start time" />  -->
+                    <input
+                      class="input is-small is-fullwidth is-rounded"
+                      [(ngModel)]="exam.startTime"
+                      [owlDateTime]="dt3"
+                      [owlDateTimeTrigger]="dt3"
+                      class="with-border"
+                      placeholder="Time"
+                    />
+                    <owl-date-time
+                      [hour12Timer]="true"
+                      [pickerType]="'timer'"
+                      #dt3
+                    ></owl-date-time>
+                  </div>
+                </div>
+
+                <div class="col-xl-12">
+                  <div class="submit-field">
+                    <h5>Duration<em>*</em></h5>
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.duration"
+                      placeholder="duration in mins"
+                    />
+                  </div>
+                  <div class="submit-field">
+                    <h5>Max marks<em>*</em></h5>
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.maxmarks"
+                      placeholder="marks"
+                    />
+                  </div>
+                  <div class="submit-field">
+                    <h5>Passing marks<em>*</em></h5>
+                    <input
+                      type="text"
+                      class="with-border"
+                      [(ngModel)]="exam.passmarks"
+                      placeholder="passing marks"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <a
+                  [routerLink]="['/admin/exam-list']"
+                  class="button col-xl-3 small margin-top-30"
+                >
+                  Back</a
+                >
+                <a
+                  (click)="saveExam()"
+                  class="button col-xl-3 offset-xl-6 small margin-top-30"
+                  >Update</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Dashboard Box -->
+
+      <!-- Dashboard Content / End -->
+    </div>
+    <!-- Dashboard Container / End -->
+  </div>
+</div>

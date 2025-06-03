@@ -1,0 +1,60 @@
+<div class="dashboard-content-container container">
+  <div class="row">
+    <!-- Content -->
+    <div class="col-xl-8 col-lg-8 content-right-offset">
+      <div class="single-page-section">
+        <h3 class="margin-bottom-25 btnStart">Exam Details and Descriptions</h3>
+
+        <div *ngIf="examDetail != null" class="dashboard-content-inner">
+          <p>
+            {{ examDetail.name }}
+            {{ examDetail.instruction }}
+          </p>
+        </div>
+        <!-- <button class="button btnContinue" (click)="gotoExamPage()">Start</button> -->
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- Sidebar -->
+    <div class="col-xl-4 col-lg-4">
+      <div class="sidebar-container">
+        <a
+          (click)="gotoExamPage()"
+          class="apply-now-button popup-with-zoom-anim btnStart"
+          >Start Now <i class="icon-material-outline-arrow-right-alt"></i
+        ></a>
+
+        <!-- Sidebar Widget -->
+        <div class="sidebar-widget">
+          <div class="job-overview">
+            <div class="job-overview-headline">Exam Detail</div>
+            <div *ngIf="examDetail != null" class="job-overview-inner">
+              <ul>
+                <li>
+                  <i class="icon-material-outline-location-on"></i>
+                  <span>Duration</span>
+                  <h5>{{ examDetail.duration }} min</h5>
+                </li>
+                <li>
+                  <i class="icon-material-outline-business-center"></i>
+                  <span>Start Time</span>
+                  <h5>{{ examDetail.fixedTime }}</h5>
+                </li>
+                <li>
+                  <i class="icon-material-outline-local-atm"></i>
+                  <span>Start Date</span>
+                  <h5>{{ examDetail.date }}</h5>
+                </li>
+                <li>
+                  <i class="icon-material-outline-access-time"></i>
+                  <span>Total Marks</span>
+                  <h5>{{ examDetail.maxmarks }}</h5>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

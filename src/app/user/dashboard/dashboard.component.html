@@ -1,0 +1,102 @@
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div *ngIf="user != null" class="dashboard-headline margin-bottom-10">
+    <h3>{{ user.firstName }}</h3>
+    <span>We are glad to see you again!</span>
+
+    <!-- Breadcrumbs -->
+    <!-- <nav id="breadcrumbs" class="dark">
+      <ul>
+        <li><a href="dashboard.html#">Home</a></li>
+        <li>Dashboard</li>
+      </ul>
+    </nav> -->
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <div class="col-xl-8">
+      <!-- Dashboard Box -->
+      <div class="dashboard-box main-box-in-row margin-top-10">
+        <div class="headline">
+          <h3><i class="icon-feather-bar-chart-2"></i> Your Exam Views</h3>
+          <div class="select-month">
+            <input
+              [owlDateTimeTrigger]="dt"
+              [owlDateTime]="dt"
+              [formControl]="date"
+              placeholder="Select Month"
+            />
+            <owl-date-time
+              [pickerType]="'calendar'"
+              [startView]="'multi-years'"
+              (yearSelected)="chosenYearHandler($event)"
+              (monthSelected)="chosenMonthHandler($event, dt)"
+              #dt="owlDateTime"
+            ></owl-date-time>
+          </div>
+          <div class="sort-by">
+            <select class="select-filter" (change)="changeOption($event)">
+              <option
+                [value]="opreport"
+                *ngFor="let opreport of optionReport"
+                >{{ opreport }}</option
+              >
+              <!-- <option>Last 6 Months</option> -->
+              <!-- <option>This Year</option> -->
+            </select>
+          </div>
+        </div>
+        <div class="content">
+          <!-- Chart -->
+          <div *ngIf="!chartFlag && !monthchartFlag" class="chart">
+            <canvas #myChart width="100" height="45"></canvas>
+          </div>
+        </div>
+        <div *ngIf="chartFlag && !monthchartFlag" class="content">
+          <!-- Chart -->
+          <div class="chart">
+            <canvas #myChartSix width="100" height="45"></canvas>
+          </div>
+        </div>
+        <div *ngIf="monthchartFlag" class="content">
+          <!-- Chart -->
+          <div class="chart">
+            <canvas #myChartMonth width="100" height="45"></canvas>
+          </div>
+        </div>
+        <!-- Dashboard Box / End -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="col-xl-4">
+          <!-- Dashboard Box -->
+          <!-- If you want adjust height of two boxes 
+						 add to the lower box 'main-box-in-row' 
+						 and 'child-box-in-row' to the higher box -->
+          <div class="dashboard-box child-box-in-row"></div>
+          <!-- Dashboard Box / End -->
+        </div>
+        <!-- </div> -->
+        <!-- Row / End -->
+
+        <!-- Footer -->
+        <!-- <div class="dashboard-footer-spacer"></div>
+        <div class="small-footer margin-top-15">
+          <div class="small-footer-copyrights">
+            © 2019 <strong>ViteMinds</strong>. All Rights Reserved.
+          </div>
+          <div class="clearfix"></div>
+        </div> -->
+        <!-- Footer / End -->
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <div class="dashboard-footer-spacer"></div>
+  <div class="small-footer margin-top-15">
+    <div class="small-footer-copyrights">
+      © 2019 <strong>ViteMinds</strong>. All Rights Reserved.
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>

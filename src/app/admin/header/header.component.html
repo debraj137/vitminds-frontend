@@ -1,0 +1,155 @@
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth" [class]="customClass">
+  <!-- Header -->
+  <div id="header">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <!-- Logo -->
+        <div id="logo">
+          <a [routerLink]="['']"><img src="/assets/images/logo.png" alt=""/></a>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav id="navigation">
+          <ul id="responsive">
+            <li>
+              <a [routerLink]="['']" class="current">Home</a>
+              <!-- <ul class="dropdown-nav">
+                <li><a href="index.html">Home 1</a></li>
+                <li><a href="index-2.html">Home 2</a></li>
+                <li><a href="index-3.html">Home 3</a></li>
+              </ul> -->
+            </li>
+
+            <!-- <li>
+              <a [routerLink]="['admin/dashboard']">Dashboard</a>
+              <ul class="dropdown-nav">
+                <li><a [routerLink]="['admin/dashboard']">Dashboard</a></li> -->
+            <!-- <li><a href="dashboard-messages.html">Messages</a></li> -->
+            <!-- <li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
+                <li><a href="dashboard-reviews.html">Reviews</a></li> -->
+            <!-- <li>
+                  <a href="dashboard-manage-jobs.html">Jobs</a>
+                  <ul class="dropdown-nav">
+                    <li>
+                      <a href="dashboard-manage-jobs.html">Manage Jobs</a>
+                    </li>
+                    <li>
+                      <a href="dashboard-manage-candidates.html"
+                        >Manage Candidates</a
+                      >
+                    </li>
+                    <li><a href="dashboard-post-a-job.html">Post a Job</a></li>
+                  </ul>
+                </li> -->
+            <!-- <li>
+                  <a href="dashboard-manage-tasks.html">Ptoblems</a>
+                  <ul class="dropdown-nav">
+                    <li>
+                      <a href="dashboard-manage-tasks.html">Manage Problems</a>
+                    </li>
+                    <li>
+                      <a href="dashboard-post-a-task.html">Post a query</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a href="dashboard.html">Forums</a></li>
+                <li><a href="dashboard-settings.html">Settings</a></li> -->
+            <!-- </ul>
+            </li> -->
+          </ul>
+        </nav>
+        <div class="clearfix"></div>
+        <!-- Main Navigation / End -->
+      </div>
+      <!-- Left Side Content / End -->
+
+      <!-- Right Side Content / End -->
+      <div class="right-side">
+        <!--  User Notifications / End -->
+
+        <!-- User Menu -->
+        <div class="header-widget">
+          <!-- Not LoggeIn -->
+          <!-- <a
+            *ngIf="!isLoggedIn"
+            [routerLink]="['/admin']"
+            class="popup-with-zoom-anim log-in-button"
+            ><i class="icon-feather-log-in"></i>
+            <span>Log In / Register</span></a
+          > -->
+          <!-- LoggeIn -->
+          <div
+            *ngIf="isLoggedIn"
+            class="header-notifications user-menu"
+            [ngClass]="userMenuStatue ? 'active' : ''"
+          >
+            <div class="header-notifications-trigger">
+              <a href="#" (click)="handleUserMenuTrigger($event)">
+                <div class="user-avatar status-online">
+                  <img src="/assets/images/user_defualt3.png" alt="" />
+                </div>
+                {{ user.firstName }}
+              </a>
+            </div>
+
+            <!-- Dropdown -->
+            <div class="header-notifications-dropdown">
+              <!-- User Status -->
+              <div class="user-status">
+                <!-- User Name / Avatar -->
+                <div class="user-details">
+                  <div class="user-avatar status-online">
+                    <img src="/assets/images/user_defualt3.png" alt="" />
+                  </div>
+                  <div class="user-name">
+                    {{ user.firstName }}
+                    <!-- <span>Freelancer</span> -->
+                  </div>
+                </div>
+                <!-- User Status Switcher -->
+                <div class="status-switch" id="snackbar-user-status">
+                  <label class="user-online current-status">Online</label>
+                  <label class="user-invisible">Invisible</label>
+                  <!-- Status Indicator -->
+                  <span class="status-indicator" aria-hidden="true"></span>
+                </div>
+              </div>
+
+              <ul class="user-menu-small-nav">
+                <li>
+                  <a [routerLink]="['/admin/dashboard']"
+                    ><i class="icon-material-outline-dashboard"></i>
+                    Dashboard</a
+                  >
+                </li>
+                <li>
+                  <a (click)="logout()" class="l_cursor"
+                    ><i class="icon-material-outline-power-settings-new"></i>
+                    Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- User Menu / End -->
+
+        <!-- Mobile Navigation Button -->
+        <span class="mmenu-trigger">
+          <button class="hamburger hamburger--collapse" type="button">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </span>
+      </div>
+      <!-- Right Side Content / End -->
+    </div>
+  </div>
+  <!-- Header / End -->
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->

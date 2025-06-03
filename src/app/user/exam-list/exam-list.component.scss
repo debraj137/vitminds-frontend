@@ -1,0 +1,9 @@
+.exam-lists {
+  .action-btn {
+    display: inline;
+    margin-left: 0.5rem;
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+}

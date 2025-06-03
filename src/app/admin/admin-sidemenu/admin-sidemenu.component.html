@@ -1,0 +1,197 @@
+<!-- <div class="dashboard-container"> -->
+<!-- Dashboard Sidebar
+	================================================== -->
+<div class="dashboard-sidebar">
+  <div class="dashboard-sidebar-inner" data-simplebar>
+    <div class="dashboard-nav-container">
+      <!-- Responsive Navigation Trigger -->
+      <a href="#" class="dashboard-responsive-nav-trigger">
+        <span class="hamburger hamburger--collapse">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </span>
+        <span class="trigger-title">Dashboard Navigation</span>
+      </a>
+
+      <!-- Navigation -->
+      <div class="dashboard-nav">
+        <div class="dashboard-nav-inner">
+          <ul data-submenu-title="Start">
+            <li
+              (click)="gotoCompment('dashboard')"
+              [ngClass]="{ active: activeComponent.dashboard == true }"
+            >
+              <a
+                [routerLink]="['/admin/dashboard']"
+                [queryParams]="{ dashboard: true }"
+                ><i class="icon-material-outline-dashboard"></i> Dashboard</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('college')"
+              [ngClass]="{ active: activeComponent.college == true }"
+            >
+              <a
+                [routerLink]="['/admin/college_list']"
+                [queryParams]="{ college: true }"
+                routerLinkActive="active"
+                ><i class="icon-material-outline-star-border"></i> College</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('student')"
+              [ngClass]="{ active: activeComponent.student == true }"
+            >
+              <a
+                [routerLink]="['/admin/student_list']"
+                [queryParams]="{ student: true }"
+                ><i class="icon-material-outline-star-border"></i> Students</a
+              >
+            </li>
+
+            <li
+              (click)="gotoCompment('subject')"
+              [ngClass]="{ active: activeComponent.subject == true }"
+            >
+              <a
+                [routerLink]="['/admin/subjects']"
+                [queryParams]="{ subject: true }"
+                ><i class="icon-material-outline-question-answer"></i>
+                Subjects</a
+              >
+              <!-- <span class="nav-tag">2</span> -->
+            </li>
+            <li
+              (click)="gotoCompment('course')"
+              [ngClass]="{ active: activeComponent.course == true }"
+            >
+              <a
+                [routerLink]="['/admin/course_list']"
+                [queryParams]="{ course: true }"
+                ><i class="icon-material-outline-star-border"></i> Course</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('topic-category')"
+              [ngClass]="{ active: activeComponent.topic_category == true }"
+            >
+              <a
+                [routerLink]="['/admin/category_list']"
+                [queryParams]="{ 'topic-category': true }"
+                ><i class="icon-material-outline-star-border"></i
+                >Topic-Category</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('question')"
+              [ngClass]="{ active: activeComponent.questionList == true }"
+            >
+              <a
+                [routerLink]="['/admin/question-list']"
+                [queryParams]="{ question: true }"
+                ><i class="icon-material-outline-star-border"></i> Question
+                List</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('examlist')"
+              [ngClass]="{ active: activeComponent.examList == true }"
+            >
+              <a
+                [routerLink]="['/admin/exam-list']"
+                [queryParams]="{ examlist: true }"
+                ><i class="icon-material-outline-star-border"></i> Exam List</a
+              >
+            </li>
+
+            <li
+              (click)="gotoCompment('batches')"
+              [ngClass]="{ active: activeComponent.batch == true }"
+            >
+              <a
+                [routerLink]="['/admin/batch_list']"
+                [queryParams]="{ batches: true }"
+                ><i class="icon-material-outline-star-border"></i> Batch</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('feedback')"
+              [ngClass]="{ active: activeComponent.feedback == true }"
+            >
+              <a
+                [routerLink]="['/admin/feedback-list']"
+                [queryParams]="{ feedback: true }"
+                ><i class="icon-material-outline-star-border"></i> Feedback
+                List</a
+              >
+            </li>
+            <li
+              (click)="gotoCompment('trainer')"
+              [ngClass]="{ active: activeComponent.trainer == true }"
+            >
+              <a
+                [routerLink]="['/admin/trainer-list']"
+                [queryParams]="{ trainer: true }"
+                ><i class="icon-material-outline-star-border"></i> Trainer
+                List</a
+              >
+            </li>
+
+            <li
+              (click)="gotoCompment('organization')"
+              [ngClass]="{ active: activeComponent.organization == true }"
+            >
+              <a
+                [routerLink]="['/admin/organization-list']"
+                [queryParams]="{ organization: true }"
+                ><i class="icon-material-outline-star-border"></i> Organization
+                List</a
+              >
+            </li>
+
+            <li
+              (click)="gotoCompment('invoice')"
+              [ngClass]="{ active: activeComponent.invoice == true }"
+            >
+              <a
+                [routerLink]="['/admin/invoice-list']"
+                [queryParams]="{ invoice: true }"
+                ><i class="icon-material-outline-star-border"></i> Invoice
+                List</a
+              >
+            </li>
+            
+            <!-- <li
+              (click)="gotoCompment('report')"
+              [ngClass]="{ active: activeComponent.report == true }"
+            >
+              <a
+                [routerLink]="['/admin/report']"
+                [queryParams]="{ report: true }"
+                ><i class="icon-material-outline-star-border"></i> Report
+              </a>
+            </li> -->
+          </ul>
+
+          <ul data-submenu-title="Account">
+            <li>
+              <a [routerLink]="" (click)="logout()" class="hvr"
+                ><i class="icon-material-outline-power-settings-new"></i>
+                Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Navigation / End -->
+    </div>
+  </div>
+</div>
+<!-- Dashboard Sidebar / End -->
+
+<!-- Dashboard Content
+	================================================== -->
+
+<!-- Dashboard Content / End -->
+<!-- </div> -->

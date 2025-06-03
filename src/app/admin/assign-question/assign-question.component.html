@@ -1,0 +1,161 @@
+<div class="dashboard-content-container" *ngIf="!editFlag" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- <div class="dashboard-headline"> -->
+    <!-- <h3>Subject List</h3> -->
+    <!-- Row -->
+    <div class="row" *ngIf="!qFileFlag">
+      <!-- Dashboard Box -->
+
+      <div class="col-xl-12">
+        <div class="dashboard-box" *ngIf="!addFlag">
+          <!-- Headline -->
+          <button class="button btn-primary btn-sm" (click)="back()">
+            Back
+          </button>
+
+          <div class="headline">
+            <h5>
+              <i class="icon-feather-folder-plus"></i>Previous Assigned
+              Questions
+              <button
+                class="btn btn-primary btn-sm floats-right"
+                type="button"
+                (click)="addQuestion()"
+              >
+                Add
+              </button>
+
+              <button
+                class="btn btn-primary btn-sm floats-right margin-right-5 margin-left-5"
+                type="button"
+                (click)="qFileFlag = true"
+              >
+                Upload Question file
+              </button>
+            </h5>
+            <br />
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search question.."
+              class="form-control wd"
+            />
+          </div>
+
+          <table id="MyTable" class="table">
+            <thead>
+              <tr>
+                <!-- <th>ID</th> -->
+                <th>QuestionName</th>
+                <th>Marks</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let course of items; let i = index">
+                <!-- <td>{{ course.id }}</td> -->
+                <td (click)="goToQuestionDetail(course.question)">
+                  {{ course.question }}
+                </td>
+                <td>{{ course.marks }}</td>
+                <td>
+                  <!-- <button class="btn btn-primary btn-sm margin-right-5">
+                    Edit
+                  </button> -->
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="remove(course.id)"
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="dashboard-box" *ngIf="addFlag">
+          <!-- Headline -->
+          <button class="button btn-primary btn-sm" (click)="backTo()">
+            Back
+          </button>
+          <div class="headline row">
+            <h5>
+              <i class="icon-feather-folder-plus col-md-12"></i> Add Questions
+            </h5>
+            <table id="MyTable" class="table col-md-12">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Subject</th>
+                  <th>Assign</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let course of allQuestionlist">
+                  <td>{{ course.id }}</td>
+                  <td (click)="goToQuestionDetail(course.id)">
+                    {{ course.name }}
+                  </td>
+                  <td>{{ course.subject.name }}</td>
+                  <td class="checkbox-input">
+                    <input
+                      type="checkbox"
+                      class="with-border"
+                      (click)="checkMapFun(course.id)"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="assignedQuestions()"
+            >
+              Assign
+            </button>
+          </div>
+        </div>
+
+        <!-- Dashboard Content / End -->
+      </div>
+      <!-- Dashboard Container / End -->
+    </div>
+    <div class="dashboard-box" *ngIf="qFileFlag">
+      <!-- Headline -->
+      <button class="button btn-primary btn-sm" (click)="backToQuestion()">
+        Back
+      </button>
+      <div class="headline">
+        <div class="submit-field">
+          <h5><i class="icon-feather-folder-plus"></i> Upload Question File</h5>
+
+          <div class="with-border open margin-bottom-0">
+            <select class="margin-bottom-10" [(ngModel)]="subjectId">
+              <option value="undefined">Select Subject</option>
+              <option value="{{ sub.id }}" *ngFor="let sub of subjectlist">{{
+                sub.name
+              }}</option>
+            </select>
+          </div>
+          <div class="with-border open margin-bottom-20">
+            <input
+              type="file"
+              class="input-file"
+              (change)="selectFile($event)"
+            />
+          </div>
+          <div class="btn-group with-border open margin-bottom-10">
+            <button
+              class="btn btn-primary btn-md btn-default float-right"
+              type="button"
+              (click)="uploadQuestionSheet()"
+            >
+              Upload
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

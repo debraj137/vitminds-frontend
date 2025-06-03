@@ -1,0 +1,71 @@
+<div class="dashboard-content-inner">
+  <!-- <button class="button btn-primary" (click)="goBack()">Back</button> -->
+  <div class="row" *ngIf="question">
+    <div class="col-xl-12">
+      <div class="dashboard-box">
+        <!-- Headline -->
+
+        <!--tab end-->
+      </div>
+    </div>
+    <!--question part end-->
+
+    <!-- preview start -->
+    <div class="col-xl-12" *ngIf="question.questonType != 'objective'">
+      <div class="dashboard-box">
+        <!-- Headline -->
+        <div class="headline">
+          <h5>
+            {{ question.name }}
+          </h5>
+        </div>
+        <div class="content with-padding padding-bottom-10">
+          <div [innerHTML]="question.description"></div>
+          <ul *ngIf="optionArr && optionArr.length > 0" class="">
+            <li>1. {{ optionArr[0].name }}</li>
+            <li>2. {{ optionArr[1].name }}</li>
+            <li>3. {{ optionArr[2].name }}</li>
+            <li>4. {{ optionArr[3].name }}</li>
+          </ul>
+          <button class="button btn-info" (click)="confirm()">
+            Back
+          </button>
+          <button class="button btn-primary edit-btn" (click)="edit()">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- preview end -->
+
+    <!-- question option preview start -->
+
+    <div class="col-xl-12" *ngIf="question.questonType == 'objective'">
+      <div class="dashboard-box">
+        <!-- Headline -->
+        <div class="headline">
+          <h5>
+            {{ question.name }}
+          </h5>
+        </div>
+
+        <div class="content with-padding padding-bottom-10">
+          <div [innerHTML]="question.description"></div>
+          <ul *ngIf="optionArr && optionArr.length > 0" class="rm-bullet">
+            <li>1. {{ optionArr[0].name }}</li>
+            <li>2. {{ optionArr[1].name }}</li>
+            <li>3. {{ optionArr[2].name }}</li>
+            <li>4. {{ optionArr[3].name }}</li>
+          </ul>
+          <button class="button btn-primary" (click)="edit()">
+            Edit
+          </button>
+          <button class="button btn-info confirm-btn" (click)="confirm()">
+            Confirm/Save
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- question option preview end  -->
+  </div>
+</div>

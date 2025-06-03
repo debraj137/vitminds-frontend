@@ -1,0 +1,336 @@
+<!-- Dashboard Content
+      ================================================== -->
+
+<!-- Add New Organization -->
+<ngx-smart-modal #myModal2 [identifier]="'myModal2'">
+  <div class="welcome-text">
+    <h3>Add New Organization</h3>
+  </div>
+
+  <form [formGroup]="saveOrganizationForm">
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.name"
+        placeholder="organization name"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.name.errors"
+        formControlName="name"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.primaryEmailId"
+        placeholder="Primary Email Id"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.primaryEmailId.errors"
+        formControlName="primaryEmailId"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.secondaryEmailId"
+        placeholder="Secondary Email Id"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.secondaryEmailId.errors"
+        formControlName="secondaryEmailId"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.mobileNo"
+        placeholder="Mobile Number"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.mobileNo.errors"
+        formControlName="mobileNo"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.gst"
+        placeholder="GST"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.gst.errors"
+        formControlName="gst"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.website"
+        placeholder="Organization Website"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.website.errors"
+        formControlName="website"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.startedYear"
+        placeholder="organization Started Year"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.startedYear.errors"
+        formControlName="startedYear"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.userType"
+        placeholder="User Type"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.userType.errors"
+        formControlName="userType"
+      />
+    </div>
+    <div class="submit-field">
+      <textarea
+        type="text"
+        [(ngModel)]="organization.aboutInstitute"
+        placeholder="About Organization..."
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.aboutInstitute.errors"
+        formControlName="aboutInstitute"
+      ></textarea>
+    </div>
+    <div class="submit-field">
+      <h5>Active/Deactive</h5>
+      <label class="switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="organization.active"
+          class="with-border"
+          [class.bdr-red]="submitted && formValid.active.errors"
+          formControlName="active"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </form>
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveNewOrganization()"
+  >
+    save Organization <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+
+<div class="dashboard-content-inner">
+  <div class="dashboard-headline">
+    <h3>Organization</h3>
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal2').open()"
+          >
+            Add Organization
+            <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <div class="headline">
+          <h3 class="margin-bottom-0">
+            <i class="icon-feather-folder-plus"></i> Organization List
+          </h3>
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search organization..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Organization Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Code</th>
+              <th scope="col">About Organization</th>
+              <th scope="col">Active/Deactive</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let organization of organizationlist">
+              <td>{{ organization.id }}</td>
+              <td>{{ organization.name }}</td>
+              <td>{{ organization.primaryEmailId }}</td>
+              <td>{{ organization.mobileNo }}</td>
+              <td>{{ organization.code }}</td>
+              <td>{{ organization.aboutInstitute }}</td>
+              <td>{{ organization.active }}</td>
+              <td>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  style="font-size: 20px;"
+                  (click)="edit(organization)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update Organization  -->
+
+<ngx-smart-modal #myModal1 identifier="myModal1">
+  <div class="welcome-text">
+    <h3>Update Organization</h3>
+  </div>
+
+  <form [formGroup]="saveOrganizationForm">
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.name"
+        placeholder="organization name"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.name.errors"
+        formControlName="name"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.primaryEmailId"
+        placeholder="Primary Email Id"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.primaryEmailId.errors"
+        formControlName="primaryEmailId"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.secondaryEmailId"
+        placeholder="Secondary Email Id"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.secondaryEmailId.errors"
+        formControlName="secondaryEmailId"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.mobileNo"
+        placeholder="Mobile Number"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.mobileNo.errors"
+        formControlName="mobileNo"
+      />
+    </div>
+    <!-- <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.code"
+        placeholder="CODE"
+        formControlName="code"
+        disabled
+      />
+    </div> -->
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.gst"
+        placeholder="GST"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.gst.errors"
+        formControlName="gst"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.website"
+        placeholder="Organization Website"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.website.errors"
+        formControlName="website"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.startedYear"
+        placeholder="organization Started Year"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.startedYear.errors"
+        formControlName="startedYear"
+      />
+    </div>
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="organization.userType"
+        placeholder="User Type"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.userType.errors"
+        formControlName="userType"
+      />
+    </div>
+    <div class="submit-field">
+      <textarea
+        type="text"
+        [(ngModel)]="organization.aboutInstitute"
+        placeholder="About Organization..."
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.aboutInstitute.errors"
+        formControlName="aboutInstitute"
+      ></textarea>
+    </div>
+    <div class="submit-field">
+      <h5>Active/Deactive</h5>
+      <label class="switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="organization.active"
+          class="with-border"
+          [class.bdr-red]="submitted && formValid.active.errors"
+          formControlName="active"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </form>
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveOrganization()"
+  >
+    Update Organization <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>

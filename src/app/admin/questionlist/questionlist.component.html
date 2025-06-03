@@ -1,0 +1,218 @@
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New Question</h3>
+  </div>
+
+  <div class="submit-field">
+    <button
+      class="button btn-primary button full-width button-sliding-icon ripple-effect"
+      (click)="Q_TYPE('objective')"
+    >
+      Objective
+    </button>
+  </div>
+  <div class="submit-field">
+    <button
+      class="button btn-primary button full-width button-sliding-icon ripple-effect"
+      (click)="Q_TYPE('subjective')"
+    >
+      Subjective
+    </button>
+  </div>
+</ngx-smart-modal>
+<!-- testing ngx end -->
+
+<div class="dashboard-content-inner" *ngIf="!editFlag">
+  <div class="dashboard-headline">
+    <h3>Questions</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add Question <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            type="button"
+            (click)="qFileFlag = true"
+          >
+            Upload Question file
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="dashboard-box margin-top-0" *ngIf="!qFileFlag">
+    <!-- Headline -->
+    <div class="headline">
+      <h3><i class="icon-feather-folder-plus"></i> Question List</h3>
+      <div class="submit-field margin-bottom-0">
+        <select
+          class="form-control sortBySub"
+          id="subject"
+          (change)="sortBySubject($event)"
+          [(ngModel)]="subjectId"
+        >
+          <option value="undefined" disabled>Sort By Subject</option>
+          <option value="All">All</option>
+          <option value="{{ sub.id }}" *ngFor="let sub of subjectlist">{{
+            sub.name
+          }}</option>
+        </select>
+      </div>
+
+      <div class="submit-field margin-bottom-0">
+        <input
+          [(ngModel)]="searchText"
+          placeholder="Search question..."
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th>Index</th> -->
+          <th scope="col">Name</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Marks Of Question</th>
+          <th scope="col">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let course of listOfQuestion">
+          <!-- <td>{{ i + 1 }}</td> -->
+          <td>{{ course.name }}</td>
+          <td>{{ course.subject.name }}</td>
+          <td>{{ course.questionMarks }}</td>
+          <td>
+            <!-- <button class="btn btn-primary" (click)="edit(course)">
+                      Edit
+                    </button> -->
+            <i
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Edit"
+              class="fa fa-edit ptr testcase"
+              style="font-size: 20px;"
+              (click)="edit(course)"
+            ></i>
+            <!-- <button class="btn btn-primary" (click)="delete(course.id)">
+                      Delete
+                    </button> -->
+            <span class="delete-ico">
+              <i
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Delete"
+                class="icon-line-awesome-trash-o testcase"
+                (click)="confirmModel(course.id)"
+              ></i>
+            </span>
+            <button
+              class="btn btn-primary btn-sm testcase"
+              (click)="preview(course.id)"
+            >
+              Preview
+            </button>
+            <button
+              class="btn btn-warning btn-sm testcase"
+              (click)="addTestCase(course.id)"
+            >
+              Add TestCase
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      [pageSize]="10"
+      [length]="totalElements"
+      (page)="nextPage($event)"
+    >
+    </mat-paginator>
+  </div>
+
+  <div class="dashboard-box" *ngIf="qFileFlag">
+    <div class="row">
+      <!-- Headline -->
+      <div class="col-md-6">
+        <button class="button btn-primary btn-sm" (click)="backQuestion()">
+          Back
+        </button>
+      </div>
+      <!-- /uploads/vitemindQ.xlsx -->
+      <div class="col-md-6 text-right">
+        <button class="button btn-primary btn-sm" (click)="download()">
+          Download question template
+        </button>
+      </div>
+    </div>
+    <div class="headline">
+      <div class="submit-field">
+        <h5>
+          <i class="icon-feather-folder-plus"></i> Upload Question File new
+        </h5>
+
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+          <div class="with-border open margin-bottom-0">
+            <div class="form-group">
+              <!--  class="margin-bottom-10" -->
+              <select
+                class="form-control"
+                id="subject"
+                [(ngModel)]="subjectId"
+                formControlName="subject"
+                [ngClass]="{
+                  'is-invalid': submitted && formValid.subject.errors
+                }"
+              >
+                <option value="undefined">Select Subject</option>
+                <option value="{{ sub.id }}" *ngFor="let sub of subjectlist">{{
+                  sub.name
+                }}</option>
+              </select>
+              <div
+                *ngIf="submitted && formValid.subject.errors"
+                class="invalid-feedback"
+              ></div>
+            </div>
+          </div>
+          <div class="with-border open margin-bottom-20">
+            <input
+              type="file"
+              class="input-file"
+              (change)="selectFile($event)"
+            />
+          </div>
+          <div class="btn-group with-border open margin-bottom-10">
+            <button
+              class="btn btn-primary btn-md btn-default float-right"
+              type="button"
+              (click)="uploadQuestionSheet()"
+            >
+              Upload
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Content / End -->
+</div>
+<!-- Dashboard Container / End -->
+
+<app-question *ngIf="editFlag"></app-question>

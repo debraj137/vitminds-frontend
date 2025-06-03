@@ -1,0 +1,138 @@
+<ngx-smart-modal #myModal identifier="myModal">
+  <div class="welcome-text">
+    <h3>Update Invoice</h3>
+  </div>
+
+  <div class="col">
+    <div class="col-sm-10">
+      <div class="submit-field">
+        <div class="section-headline margin-top-10 margin-bottom-12">
+          <h6>Select Payment Mode</h6>
+        </div>
+        <select
+          class="with-border"
+          [(ngModel)]="paymentModeId"
+          (change)="getLookUpIdOnChange($event)"
+        >
+          <option [ngValue]="undefined" disabled> Select Payment Mode</option>
+          <option
+            *ngFor="let payMode of paymentModeArr"
+            value="{{ payMode.id }}"
+          >
+            {{ payMode.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <div class="submit-field">
+        <div class="section-headline margin-top-10 margin-bottom-12">
+          <h6>Amount</h6>
+        </div>
+        <input
+          type="number"
+          class="with-border"
+          [(ngModel)]="paymentValue"
+          placeholder="Payment Value"
+        />
+      </div>
+
+      <button
+        class="button button-sliding-icon ripple-effect floatright"
+        type="submit"
+        form="add-note"
+        (click)="updateInvoice()"
+      >
+        Update Invoice <i class="icon-material-outline-arrow-right-alt"></i>
+      </button>
+    </div>
+    <!-- <div class="col-sm-6">
+      <div class="submit-field">
+        <input
+          type="text"
+          class="with-border"
+          [(ngModel)]="paymentMode"
+          placeholder="Last name"
+        />
+      </div>
+    </div> -->
+  </div>
+</ngx-smart-modal>
+
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Invoices</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <!-- Headline -->
+        <div class="headline">
+          <h5><i class="icon-feather-folder-plus"></i> Invoice List</h5>
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search Invoice..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>Index</th> -->
+              <th scope="col">Invoice Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Email</th>
+              <th scope="col">Batch</th>
+              <th scope="col">Course</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invoice of listOfInvoice">
+              <td>{{ invoice.invoiceId }}</td>
+              <td>
+                {{ invoice.user.firstName }} {{ invoice.user.seccondName }}
+              </td>
+              <td>{{ invoice.user.mobileNumber }}</td>
+              <td>{{ invoice.user.email }}</td>
+              <td>{{ invoice.batch.batchName }}</td>
+              <td>{{ invoice.course.name }}</td>
+              <td>{{ invoice.total }}</td>
+              <td>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="View Invoice"
+                  class="icon-material-outline-assignment ptr"
+                  (click)="viewInvoice(invoice.invoiceId)"
+                ></i>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Update Invoice"
+                  class="icon-feather-edit editptr"
+                  (click)="getInvoiceIdforUpdate(invoice.id)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

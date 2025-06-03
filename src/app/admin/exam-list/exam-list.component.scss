@@ -1,0 +1,83 @@
+.floats-right {
+  float: right;
+}
+
+.modal-header {
+  font-size: 20px;
+  background-color: #f6f6f6;
+  padding: 16px 20px;
+  margin-bottom: 30px;
+
+  input {
+    border: red;
+  }
+}
+
+.modal-content {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.modal {
+  padding: 20px;
+}
+
+.modal-body .title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 22px;
+}
+
+::ng-deep {
+  .overlay {
+    top: 5em;
+  }
+
+  .nsm-content {
+    padding: 3rem;
+  }
+}
+
+.hvr {
+  cursor: pointer;
+  color: red;
+}
+
+.ptr {
+  cursor: pointer;
+  margin-left: 1%;
+}
+
+.table th,
+.table td {
+  // padding: 0.75rem;
+  padding-left: 2rem;
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.f-r {
+  width: 100%;
+  text-align: center;
+  color: white !important;
+}
+
+.danger {
+  color: red;
+}
+.bdr-red {
+  border-color: red !important;
+}
+select {
+  font-size: 13px;
+}
+
+.sortBySub {
+  margin-left: 65%;
+  font-size: medium;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Invoice</title>
+    <link rel="stylesheet" href="assets/css/invoice.css" />
+  </head>
+
+  <body>
+    <!-- Print Button -->
+    <div class="print-button-container">
+      <a href="javascript:window.print()" class="print-button"
+        >Print this invoice</a
+      >
+    </div>
+
+    <!-- Invoice -->
+    <div id="invoice">
+      <!-- Header -->
+      <div class="row">
+        <div class="col-xl-6">
+          <div id="invoiceLogo">
+            <img src="assets/images/logo.png" alt="" />
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <p id="details">
+            <strong>Order:</strong> #{{ invoice.invoiceId }} <br />
+            <strong>Issued:</strong> {{ invoice.generateTime | date }} <br />
+            Due 7 days from date of issue
+          </p>
+        </div>
+      </div>
+
+      <!-- Client & Supplier -->
+      <div class="row">
+        <div class="col-xl-12">
+          <h2>Invoice</h2>
+        </div>
+
+        <div class="col-xl-6">
+          <strong class="margin-bottom-5">Institute</strong>
+          <p>
+            VITEMINDS<br />
+            7th Main, 19th Cross, BTM Layout, <br />
+            2nd Stage, Bangalore-560076, Karnataka <br />
+          </p>
+        </div>
+
+        <div class="col-xl-6">
+          <strong class="margin-bottom-5">Student</strong>
+          <p>
+            {{ invoice.user.firstName }} {{ invoice.user.seccondName }} <br />
+            {{ invoice.user.address }} <br />
+            {{ invoice.user.city }} {{ invoice.user.pincode }}
+            {{ invoice.user.state }} <br />
+          </p>
+        </div>
+      </div>
+
+      <!-- Invoice -->
+      <div class="row">
+        <div class="col-xl-12">
+          <table class="margin-top-20">
+            <tr>
+              <th>Course</th>
+              <th>Price</th>
+              <th>Additional Charge<em> (+)</em></th>
+              <th>Discount<em> (-)</em></th>
+              <th>Total</th>
+            </tr>
+
+            <tr>
+              <td>{{ invoice.course.name }}</td>
+              <td>{{ invoice.course.fees }}</td>
+              <td>{{ invoice.additionalCharges }}</td>
+              <td>{{ invoice.discount }}</td>
+              <td>{{ invoice.total }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-xl-4 col-xl-offset-8">
+          <table id="totals">
+            <tr>
+              <th>Total Paid</th>
+              <th *ngFor="let paymentDetail of paymentDetails">
+                <span>{{ paymentDetail.paymentValue }}</span>
+              </th>
+            </tr>
+          </table>
+
+          <!-- </div> -->
+
+          <!-- <div class="col-xl-4 col-xl-offset-8"> -->
+          <table id="totals">
+            <tr>
+              <th>Total Due</th>
+              <th>
+                <span>{{ dueAmount }}</span>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <!-- <div class="row">
+        <div class="col-xl-12">
+          <ul id="footer">
+            <li><span>www.example.com</span></li>
+            <li>
+              <a
+                href="/cdn-cgi/l/email-protection"
+                class="__cf_email__"
+                data-cfemail="d6b9b0b0bfb5b396b3aeb7bba6bab3f8b5b9bb"
+                >[email&#160;protected]</a
+              >
+            </li>
+            <li>(123) 123-456</li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script> -->
+  </body>
+</html>

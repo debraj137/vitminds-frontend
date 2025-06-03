@@ -1,0 +1,19 @@
+#invoiceLogo {
+  display: inline-block;
+  //   border-right: 1px solid #e0e0e0;
+  // height: 100%;
+  vertical-align: top;
+  padding-right: 35px;
+  margin-right: 20px;
+}
+#invoiceLogo img {
+  height: 42px;
+  width: auto;
+  top: 50%;
+  position: relative;
+  transform: translate3d(0, -50%, 0);
+}
+
+.invoiceClass {
+  margin-top: 0;
+}

@@ -1,0 +1,134 @@
+<!-- Dashboard Content
+      ================================================== -->
+
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New College</h3>
+  </div>
+
+  <form [formGroup]="saveCollegeForm">
+    <div class="submit-field">
+      <input
+        type="text"
+        [(ngModel)]="college.collegeName"
+        placeholder="college name"
+        class="with-border"
+        [class.bdr-red]="submitted && formValid.collegeName.errors"
+        formControlName="collegeName"
+      />
+    </div>
+  </form>
+  <!-- Button -->
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveCollege()"
+  >
+    Save College <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+
+<!-- ================================================================== -->
+
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Colleges</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add College <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box margin-top-0">
+        <!-- Headline -->
+        <div class="headline">
+          <h3 class="margin-bottom-0">
+            <i class="icon-feather-folder-plus"></i> College List
+          </h3>
+          <div class="submit-field margin-bottom-0">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search college..."
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!-- <table class="mat-table">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell">Id</th>
+              <th class="mat-header-cell">College Name</th>
+              <th class="mat-header-cell">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="mat-row"
+              *ngFor="let college of collegelist"
+            >
+              <td class="mat-cell">{{ college.id }}</td>
+              <td class="mat-cell">{{ college.collegeName }}</td>
+                            <td>
+                              <i data-toggle="tooltip" data-placement="top" title="Edit" class="fa fa-edit ptr" style="font-size: 20px;" (click)="edit(college)"></i>
+                            </td>
+            </tr>
+          </tbody>
+        </table> -->
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">College Name</th>
+              <th scope="col">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let college of collegelist">
+              <td>{{ college.id }}</td>
+              <td>{{ college.collegeName }}</td>
+              <td>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  style="font-size: 20px;"
+                  (click)="edit(college)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

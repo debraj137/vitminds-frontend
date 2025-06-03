@@ -1,0 +1,352 @@
+<!-- Dashboard Content
+      ================================================== -->
+
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New Trainer</h3>
+  </div>
+  <form [formGroup]="exam_form">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="submit-field" *ngIf="trainer">
+          <h5>Email<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.email"
+            placeholder="Email"
+            [class.bdr-red]="submitted && step1Form.Email.errors"
+            formControlName="Email"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>First Name<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.firstName"
+            placeholder="First Name"
+            [class.bdr-red]="submitted && step1Form.firstName.errors"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Second Name<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.seccondName"
+            placeholder="Second Name"
+            [class.bdr-red]="submitted && step1Form.secondName.errors"
+            formControlName="secondName"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Qualification<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.qualification"
+            placeholder="Qualification"
+            [class.bdr-red]="submitted && step1Form.Qualification.errors"
+            formControlName="Qualification"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Designation<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.designation"
+            placeholder="Designation"
+            [class.bdr-red]="submitted && step1Form.Designation.errors"
+            formControlName="Designation"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Mobile Number<em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            [(ngModel)]="trainer.mobileNumber"
+            placeholder="Mobile Number"
+            [class.bdr-red]="submitted && step1Form.mobileNumber.errors"
+            formControlName="mobileNumber"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-field">
+      <h5>Password<em>*</em></h5>
+      <input
+        type="text"
+        type="password"
+        class="with-border"
+        [(ngModel)]="trainer.password"
+        placeholder="Password"
+        [class.bdr-red]="submitted && step1Form.password.errors"
+        formControlName="password"
+      />
+    </div>
+  </form>
+  <!-- Button -->
+  <button
+    class="button full-width button-sliding-icon ripple-effect"
+    type="submit"
+    form="add-note"
+    (click)="saveTrainer()"
+  >
+    Save <i class="icon-material-outline-arrow-right-alt"></i>
+  </button>
+</ngx-smart-modal>
+
+<ngx-smart-modal #myModal2 identifier="myModal2">
+  <h5>Trainer Details</h5>
+  <div class="form-group textarea">
+    <table id="trainerList" *ngIf="current_trainer">
+      <tr>
+        <td>
+          <!--  <label>Id         :</label>{{ current_trainer.userId }}<br> -->
+          <label>Name :</label>{{ current_trainer.firstName
+          }}{{ current_trainer.seccondName }}<br />
+          <!--  <label>Second name :</label>{{ current_trainer.seccondName }}<br> -->
+          <label>Email :</label>{{ current_trainer.email }}<br />
+          <label>Mobile :</label>{{ current_trainer.mobileNumber }}<br />
+          <label>Qualification :</label>{{ current_trainer.qualification
+          }}<br />
+        </td>
+      </tr>
+    </table>
+  </div>
+  <h6>Batch Details</h6>
+  <div id="batchTrainer" class="card">
+    <table id="trainerBatch" class="basic-table">
+      <tr>
+        <th>Name</th>
+        <th>Batch Code</th>
+      </tr>
+
+      <tr *ngFor="let batch of batches">
+        <td width="30%">{{ batch.batchName }}</td>
+        <td width="30%">{{ batch.batchCode }}</td>
+      </tr>
+    </table>
+  </div>
+</ngx-smart-modal>
+
+<!-- testing ngx end -->
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3 class="col-md-12">Trainers</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add Trainer <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box">
+        <!-- Headline -->
+        <div class="row col-xl-12 padding-top-10">
+          <h3 class="margin-bottom-0 col-xl-6">
+            <i class="icon-feather-folder-plus"></i> Trainer List
+          </h3>
+          <div class="submit-field margin-bottom-0 col-xl-6">
+            <input
+              [(ngModel)]="searchText"
+              placeholder="Search Trainer..."
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="headline">
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- <th>Index</th> -->
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Qualification</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="row" *ngFor="let trainer of listOfTrainer">
+                <!-- <td width="10%">{{ i + 1 }}</td> -->
+                <td width="10%">
+                  {{ trainer.firstName }} {{ trainer.seccondName }}
+                </td>
+                <td>{{ trainer.email }}</td>
+                <td>{{ trainer.mobileNumber }}</td>
+                <td>{{ trainer.qualification }}</td>
+                <td *ngIf="trainer.active">Approved</td>
+                <td *ngIf="!trainer.active">Unapproved</td>
+                <td>
+                  <!-- <button class="btn btn-primary" (click)="delete(course)">
+                        Delete
+                      </button> -->
+                  <i
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete"
+                    class="icon-line-awesome-trash-o delete-ico"
+                    (click)="confirmModel(trainer.userId)"
+                  ></i>
+                  <!-- <i class="material-icons hvr" (click)="delete(trainer)">&#xe92b;</i> -->
+                  <button
+                    class="btn btn-primary btn-sm"
+                    *ngIf="!trainer.active"
+                    (click)="changeStatus(trainer.userId)"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    *ngIf="trainer.active"
+                    (click)="changeStatus(trainer.userId)"
+                  >
+                    Unapprove
+                  </button>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="trainerDetails(trainer)"
+                  >
+                    Preview
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- <div class="content">
+                  <div class="row"> -->
+
+          <!-- <div *ngIf="items.length > 0">
+                <data-table
+                  *ngIf="items.length > 10"
+                  id="my-table"
+                  [title]="'Employees'"
+                  [items]="items"
+                  [indexColumn]="false"
+                  [pagination]="true"
+                  [itemCount]="10"
+                  [limit]="10"
+                  [multiSelect]="false"
+                >
+                  <data-table-column
+                    [property]="'id'"
+                    [header]="'ID'"
+                  ></data-table-column>
+                  <data-table-column [header]="Name">
+                    <ng-template #dataTableHeader let-item="item">
+                      <i>Actions</i>
+                    </ng-template>
+                    <ng-template #dataTableCell let-item="item">
+                      <button class="btn btn-sm btn-default">
+                        {{ item.name }}
+                      </button>
+                    </ng-template>
+                  </data-table-column>
+                  <data-table-column [header]="Actions">
+                    <ng-template #dataTableHeader let-item="item"> </ng-template>
+                    <ng-template #dataTableCell let-item="item">
+                      <button
+                        (click)="delete(item)"
+                        class="btn btn-sm btn-default"
+                      >
+                        delete
+                      </button>
+                    </ng-template>
+                  </data-table-column>
+                </data-table>
+  
+                <data-table
+                  *ngIf="items.length <= 10"
+                  id="my-table"
+                  [title]="'Employees'"
+                  [items]="items"
+                  [indexColumn]="false"
+                  [pagination]="true"
+                  [itemCount]="10"
+                  [limit]="items.length"
+                  [multiSelect]="false"
+                >
+                  <data-table-column
+                    [property]="'id'"
+                    [header]="'ID'"
+                  ></data-table-column>
+                  <data-table-column [header]="Name">
+                    <ng-template #dataTableHeader let-item="item">
+                      <i>Actions</i>
+                    </ng-template>
+                    <ng-template #dataTableCell let-item="item">
+                      <button class="btn btn-sm btn-default">
+                        {{ item.name }}
+                      </button>
+                    </ng-template>
+                  </data-table-column>
+  
+                  <data-table-column [header]="Actions">
+                    <ng-template #dataTableHeader let-item="item">
+                      <i>Actions</i>
+                    </ng-template>
+                    <ng-template #dataTableCell let-item="item">
+                      <button
+                        (click)="delete(item)"
+                        class="btn btn-sm btn-default"
+                      >
+                        delete
+                      </button>
+                    </ng-template>
+                  </data-table-column>
+                </data-table>
+              </div> -->
+
+          <!-- </div>
+                </div> -->
+        </div>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+
+      <!--Pop Up Box for Subject-->
+      <!-- Dashboard Content / End -->
+    </div>
+    <!-- Dashboard Container / End -->
+  </div>
+</div>

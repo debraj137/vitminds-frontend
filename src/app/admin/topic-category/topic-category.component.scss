@@ -1,0 +1,30 @@
+.hvr {
+  cursor: pointer;
+  color: red;
+}
+
+.table th,
+.table td {
+  // padding: 0.75rem;
+  padding-left: 2rem;
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.brdr {
+  border-color: red !important;
+}
+
+::ng-deep {
+  .nsm-content {
+    margin-top: 6rem;
+  }
+}
+.ptr {
+  cursor: pointer;
+}

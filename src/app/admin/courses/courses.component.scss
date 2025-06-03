@@ -1,0 +1,54 @@
+@import "~ngx-toastr/toastr.css";
+
+// .floats-right {
+//     float: right;
+// }
+// table {
+//     width: 100%;
+// }
+// .table th,
+// .table td {
+//     // padding: 0.75rem;
+//     padding-left: 2rem;
+// }
+// .form-control {
+//     width: 50%;
+// }
+// .hvr {
+//     cursor: pointer;
+//     color: red
+// }
+::ng-deep {
+  .overlay {
+    top: 5em;
+  }
+
+  .nsm-content {
+    padding: 3rem;
+  }
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.brdr {
+  //  border: none;
+  border: 0;
+  outline: 1px solid red;
+  border-radius: 4px !important;
+}
+
+.bdr-red {
+  border-color: red !important;
+}
+.ptr {
+  cursor: pointer;
+  margin-left: 10%;
+}
+.sortBySub {
+  margin-left: 90%;
+}

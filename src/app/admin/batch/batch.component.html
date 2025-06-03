@@ -1,0 +1,252 @@
+<!-- Dashboard Sidebar / End -->
+
+<!-- Dashboard Content
+        ================================================== -->
+
+<!-- <div class="dashboard-content-container" data-simplebar> -->
+<div class="dashboard-content-inner">
+  <!-- Dashboard Headline -->
+  <div class="dashboard-headline">
+    <h3>Batches</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add Batch <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- Row -->
+
+  <!--batch box end -->
+  <!-- Dashboard Box -->
+  <div class="dashboard-box margin-top-0">
+    <!-- Headline -->
+    <div class="headline">
+      <h5><i class="icon-feather-folder-plus"></i> Batch List</h5>
+      <div class="submit-field margin-bottom-0">
+        <input
+          [(ngModel)]="searchText"
+          placeholder="Search course..."
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <!-- <th>Index</th> -->
+          <th scope="col">Name</th>
+          <th scope="col">Batch Code</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Course</th>
+          <th scope="col">Trainer</th>
+          <th scope="col">No. Of Student</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          scope="row"
+          *ngFor="
+            let batch of listOfbatches
+              | grdFilter
+                : {
+                    batchName: searchText,
+                    batchCode: searchText
+                  };
+            let i = index
+          "
+        >
+          <!-- <td>{{ i + 1 }}</td> -->
+          <td>{{ batch.batchName }}</td>
+          <td>{{ batch.batchCode }}</td>
+          <td>{{ batch.course.subject.name }}</td>
+          <td>{{ batch.course.name }}</td>
+          <td>{{ batch.trainer.firstName }} {{ batch.trainer.seccondName }}</td>
+          <td>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{ batch.studentCount }}
+          </td>
+          <td>
+            <!-- <button class="btn btn-primary" (click)="edit(course)">
+                        Edit
+                      </button> -->
+            &nbsp; &nbsp; &nbsp;<i
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Assign/Remove Student"
+              class="icon-material-outline-assignment ptr"
+              (click)="assignStudent(batch)"
+            ></i>
+            <!-- <i
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Edit"
+              class="fa fa-edit ptr"
+              style="font-size:20px"
+              (click)="edit(batch)"
+            ></i> -->
+            <!-- <button class="btn btn-primary" (click)="delete(course.id)">
+                        Delete
+                      </button> -->
+            <!-- <span class="delete-ico">
+              <i
+                data-toggle="tooltip"
+                data-placement="top"
+                title="delete"
+                class="icon-line-awesome-trash-o"
+                (click)="delete(batch)"
+              ></i>
+            </span> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      [pageSize]="10"
+      [length]="totalElements"
+      (page)="nextPage($event)"
+    >
+    </mat-paginator>
+  </div>
+
+  <!-- Dashboard Content / End -->
+</div>
+<!-- Dashboard Container / End -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <!-- Welcome Text -->
+  <div class="welcome-text">
+    <h3>Add New Batch</h3>
+  </div>
+
+  <!-- Form -->
+  <form [formGroup]="exam_form">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Select Trainer<em>*</em></h5>
+          <select
+            [(ngModel)]="batch.trainer.userId"
+            formControlName="trainerId"
+            [class.brdr]="submitted && step1Form.trainerId.errors"
+          >
+            <option [ngValue]="undefined" disabled>Select Trainer</option>
+            <option value="{{ t.userId }}" *ngFor="let t of tarinerlist"
+              >{{ t.firstName }} {{ t.seccondName }}</option
+            >
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Select course<em>*</em></h5>
+          <select
+            [(ngModel)]="batch.course.id"
+            formControlName="courseId"
+            [class.brdr]="submitted && step1Form.courseId.errors"
+          >
+            <option [ngValue]="undefined" disabled>Select Course</option>
+            <option value="{{ c.id }}" *ngFor="let c of courselist">{{
+              c.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-xl-6"> -->
+
+    <!-- </div> -->
+    <!-- <div class="col-xl-6"> -->
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Course Duration<em>*</em></h5>
+          <input
+            type="text"
+            [(ngModel)]="batch.duration"
+            formControlName="duration"
+            class="with-border"
+            placeholder="Course Duration"
+            [class.bdr-red]="submitted && step1Form.duration.errors"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Duration Type<em>*</em></h5>
+          <select
+            [(ngModel)]="batch.durationType.id"
+            formControlName="durationType"
+            [class.brdr]="submitted && step1Form.durationType.errors"
+          >
+            <option [ngValue]="undefined" disabled>Duration Type</option>
+            <option value="{{ l.id }}" *ngFor="let l of lookuplist">{{
+              l.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Batch Name <em>*</em></h5>
+          <input
+            type="text"
+            class="with-border"
+            formControlName="batchName"
+            [(ngModel)]="batch.batchName"
+            placeholder="Batch Name"
+            [class.bdr-red]="submitted && step1Form.batchName.errors"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="submit-field">
+          <h5>Batch Code <em>*</em></h5>
+          <input
+            type="text"
+            formControlName="batchCode"
+            [(ngModel)]="batch.batchCode"
+            class="with-border"
+            placeholder="Batch Code"
+            [class.bdr-red]="submitted && step1Form.batchCode.errors"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- </div> -->
+
+    <div class="submit-field">
+      <h5>Description<em>*</em></h5>
+      <textarea
+        cols="30"
+        rows="3"
+        formControlName="description"
+        [(ngModel)]="batch.description"
+        class="with-border"
+        placeholder="write here"
+        [class.bdr-red]="submitted && step1Form.description.errors"
+      ></textarea>
+    </div>
+    <!-- <div class="row"> -->
+    <a (click)="saveBatch()" class="button small margin-top-0 f-r">
+      Save
+    </a>
+    <!-- </div> -->
+  </form>
+</ngx-smart-modal>

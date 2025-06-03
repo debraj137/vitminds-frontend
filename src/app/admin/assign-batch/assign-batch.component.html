@@ -1,0 +1,154 @@
+<div class="dashboard-content-inner">
+  <!-- <div class="dashboard-headline"> -->
+  <!-- <h3>Subject List</h3> -->
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box" *ngIf="!addFlag">
+        <button class="button btn-primary btn-sm" (click)="back()">Back</button>
+        <!-- Headline -->
+        <div class="headline">
+          <h5>
+            <i class="icon-feather-folder-plus"></i> All Student
+            <button
+              class="btn btn-primary btn-sm floats-right"
+              type="button"
+              (click)="get_allBatch()"
+            >
+              Add
+            </button>
+          </h5>
+          <br />
+          <input
+            [(ngModel)]="searchText"
+            placeholder="Search question.."
+            class="form-control wd"
+          />
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of examStudentDetails; let i = index">
+              <td>{{ student.studentId }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.email }}</td>
+              <td>
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="removeStudentFromExam(student)"
+                >
+                  remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dashboard-box" *ngIf="addFlag && !studentFlag">
+        <!-- Headline -->
+        <button class="button btn-primary btn-sm" (click)="backExam()">Back</button>
+        <div class="headline row">
+          <h5 class="col-md-12">
+            <i class="icon-feather-folder-plus "></i> Select Batch
+          </h5>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Assign</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let batch of batchlist">
+                <td>{{ batch.id }}</td>
+                <td>{{ batch.batchName }}</td>
+                <td>{{ batch.batchCode }}</td>
+                <td>
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="assignFun(batch)"
+                  >
+                    select
+                  </button>
+                  <!-- <input type="checkbox" class="with-border" (click)="checkMapFun(batch.id)" /> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <button class="btn btn-primary btn-sm" (click)="assignedExams()">
+              assign
+            </button> -->
+        </div>
+      </div>
+      <div class="dashboard-box" *ngIf="studentFlag">
+        <div class="headline row">
+          <!--   <button class="button btn-primary btn-sm" (click)="get_allBatch()">Back</button> -->
+          <button class="btn btn-primary btn-sm floats-right"
+          type="button" (click)="backBatch()">Back</button>
+         
+          <h5 class="col-md-6">
+            <i class="icon-feather-folder-plus "></i> Select Student
+          </h5>
+          <div class="align-self-middle ml-auto">
+            <button class="btn btn-primary btn-sm" 
+
+             (click)="checkMapFunAll()"> Select All</button>
+          </div>
+          <table class="table col-md-12">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Assign</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of batch_student_list">
+                <td>{{ student.userId }}</td>
+                <td>{{ student.firstName }} {{ student.seccondName }}</td>
+                <td>{{ student.email }}</td>
+                <td class="checkbox-input">
+                  <input
+                  type="checkbox" 
+                  class="with-border"  *ngIf="checkMap[student.userId] == true" checked
+                  (click)="checkMapFun(student.userId)"
+                />
+                <input
+                type="checkbox" 
+                class="with-border"  *ngIf="checkMap[student.userId] != true" 
+                (click)="checkMapFun(student.userId)"
+              />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="col-md-12 text-right">
+              <button
+            class="btn btn-primary btn-sm "
+            (click)="examAssigntoStudent()"
+          >
+            assign
+          </button>
+            </div>
+      </div>
+     
+    </div>
+
+    <!-- Dashboard Content / End -->
+  </div>
+  <!-- Dashboard Container / End -->
+</div>

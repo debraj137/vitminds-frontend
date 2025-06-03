@@ -1,0 +1,77 @@
+<div class="exam">
+  <div class="exam__head head">
+    <div class="exam__title">
+      {{ examTitle }}
+    </div>
+    <div class="exam__time">
+      <!-- <button href="#" class="button ripple-effect">00:58:02 left</button> -->
+      <countdown
+        #countdown
+        [config]="{
+          leftTime: examDuration * 60,
+          notify: [115],
+          start: examStartTime
+        }"
+        class="countdown ripple-effect button"
+        (start)="onStart()"
+        (finished)="onFinished()"
+        (notify)="onNotify($event)"
+        >$!h!:$!m!:$!s!</countdown
+      >
+    </div>
+    <div class="exam__end">
+      <button href="#" class="button ripple-effect">End test</button>
+    </div>
+  </div>
+
+  <div class="exam__content">
+    <div class="exam__questions">
+      <div class="exam__questions-title">
+        <span class="exam__question-count">
+          {{ totalQuestionCount }} questions
+        </span>
+        <span class="exam__total-marks"> Total Marks: {{ examMarks }} </span>
+      </div>
+      <div
+        *ngFor="let examdetail of examQuestionDetails; let i = index"
+        class="exam__question-lists"
+      >
+        <!-- <div class="exam__question-list exam__question-list--active">
+          1. In java, which ...
+        </div> -->
+        <div
+          (click)="getQuestionDetail(i + 1, examdetail.id)"
+          [ngClass]="
+            optionMap[examdetail.id]
+              ? 'exam__question-list exam__question-list--submitted'
+              : 'exam__question-list exam__question-list--active'
+          "
+        >
+          {{ i + 1 }}. {{ examdetail.question }}
+        </div>
+        <!-- <div class="exam__question-list">
+          1. In java, which ...
+        </div>
+        <div class="exam__question-list">
+          1. In java, which ...
+        </div> -->
+      </div>
+    </div>
+
+    <div class="exam__question-content question-content">
+      <app-question
+        [questionDetail]="examQuestionDetail"
+        [examId]="examId"
+        [totalQuestionCount]="totalQuestionCount"
+        [index]="index"
+        (checkedoption)="getOptionDetail($event)"
+      >
+      </app-question>
+      <div (click)="nextQuestion()" class="question-content__next ">
+        <button class="button gray ripple-effect-dark">
+          Next Question
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

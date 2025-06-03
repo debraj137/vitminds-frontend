@@ -1,0 +1,22 @@
+.enroll {
+  margin-top: 3%;
+}
+
+.table td:last-child {
+  display: -webkit-box;
+  /* display: flex; */
+  -webkit-box-align: center;
+  align-items: center;
+}
+.brdr {
+  border: 0;
+  outline: 1px solid red;
+  border-radius: 4px !important;
+}
+.bdr-red {
+  border-color: red !important;
+}
+select {
+  font-size: 13px;
+  font: bold;
+}

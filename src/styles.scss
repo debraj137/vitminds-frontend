@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+
+@charset "UTF-8";
+@import "./assets/css/bootstrap-grid.css";
+@import "./assets/css/icons.css";
+@import "https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&subset=latin-ext";
+@import "./assets/css/style.css";
+@import "./assets/css/colors/blue.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ngx-smart-modal/ngx-smart-modal";
+@import "~ngx-toastr/toastr.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 30px;
+}
+
+.nsm-dialog {
+  top: 10%;
+}
+
+.dashboard-box {
+  float: left;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-action {
+  margin: 0 0.2rem 0.2rem 0;
+}
+
+.table td:last-child {
+  display: flex;
+  align-items: center;
+}
+.overlay {
+  top: 0px !important;
+}
+.nsm-content {
+  padding: 1.5rem !important;
+}

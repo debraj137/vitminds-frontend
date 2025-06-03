@@ -1,0 +1,449 @@
+<!-- Dashboard Content
+            ================================================== -->
+
+<div class="dashboard-content-container" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- Dashboard Headline -->
+
+    <!-- Row -->
+    <div class="row">
+      <!--question part-->
+      <div class="col-xl-12" *ngIf="!ques_status && !questionOptionPreview">
+        <div class="dashboard-box">
+          <!-- Headline -->
+
+          <div
+            class="content with-padding padding-bottom-10"
+            *ngIf="question && question.questionType"
+          >
+            <ul
+              class="nav nav-pills nav-justified mb-3"
+              id="pills-tab"
+              role="tablist"
+            >
+              <li class="nav-item">
+                <a
+                  [ngClass]="{ active: currentSort === 'Question' }"
+                  (click)="navigateTo('Question')"
+                  class="nav-link active"
+                  id="pills-q-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="pills-q"
+                  aria-selected="true"
+                  >Question</a
+                >
+              </li>
+              <li
+                class="nav-item"
+                *ngIf="question.questionType === 'objective'"
+              >
+                <a
+                  [ngClass]="{ active: currentSort === 'Options' }"
+                  (click)="navigateTo('Options')"
+                  class="nav-link"
+                  id="pills-o-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="pills-o"
+                  aria-selected="false"
+                  >Options</a
+                >
+              </li>
+              <li
+                class="nav-item"
+                *ngIf="question.questionType === 'objective'"
+              >
+                <a
+                  [ngClass]="{ active: currentSort === 'Choose' }"
+                  (click)="navigateTo('Choose')"
+                  class="nav-link"
+                  id="pills-c-tab"
+                  data-toggle="pill"
+                  role="tab"
+                  aria-controls="pills-c"
+                  aria-selected="false"
+                  >Choose</a
+                >
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="pills-q"
+                role="tabpanel"
+                aria-labelledby="pills-home-tab"
+              >
+                <div class="" *ngIf="currentSort === 'Question'">
+                  <div class="row">
+                    <div class="col-xl-6 col-md-6">
+                      <div
+                        class="section-headline margin-top-25 margin-bottom-12"
+                      >
+                        <!-- <h5>Select langauage</h5> -->
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="question name"
+                        [(ngModel)]="question.name"
+                      />
+                    </div>
+                    <div class="col-xl-6 col-md-6">
+                      <div
+                        class="section-headline margin-top-25 margin-bottom-12"
+                      >
+                        <!-- <h5>Select langauage</h5> -->
+                      </div>
+
+                      <select class="" [(ngModel)]="question.topicCategory.id">
+                        <option value="undefined">select topic category</option>
+                        <option
+                          value="{{ topic_cat.id }}"
+                          *ngFor="let topic_cat of topic_category"
+                          >{{ topic_cat.name }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-xl-6 col-md-6">
+                      <select class="" [(ngModel)]="question.subject.id">
+                        <option value="undefined">select subject</option>
+                        <option
+                          value="{{ sub.id }}"
+                          *ngFor="let sub of subjectlist"
+                          >{{ sub.name }}</option
+                        >
+                      </select>
+                    </div>
+
+                    <div class="col-xl-6 col-md-6">
+                      <input
+                        type="number"
+                        placeholder="question marks"
+                        [(ngModel)]="question.questionMarks"
+                      />
+                    </div>
+
+                    <!-- <div class="col-xl-6 col-md-6">
+                      <div class="row">
+                        <div class="col-xl-6 col-md-6">
+                          <div class="checkbox">
+                            <input
+                              type="checkbox"
+                              id="r1"
+                              (click)="checkPractice()"
+                              class=""
+                            />
+                            <label for="r1">
+                              <span class="checkbox-icon padding-left-10">
+                                <p class="p-cls"></p>
+                              </span>
+                              Practice</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+
+                  <div class="margin-top-10">
+                    <div class="submit-field">
+                      <h5>Description</h5>
+                      <angular-editor
+                        [config]="editorConfig"
+                        [(ngModel)]="question.description"
+                        id="editor1"
+                      >
+                      </angular-editor>
+                    </div>
+                  </div>
+
+                  <div class="margin-top-10">
+                    <div class="submit-field">
+                      <h5>
+                        Code Template
+                        <span> (Main class name must be Solution)</span>
+                      </h5>
+                      <angular-editor
+                        [config]="editorConfig"
+                        [(ngModel)]="question.template"
+                        id="editor1"
+                      >
+                      </angular-editor>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="button btn-primary preview-btn"
+                  (click)="save_question()"
+                  *ngIf="
+                    currentSort === 'Question' && question_TYPE != 'objective'
+                  "
+                >
+                  Preview
+                </button>
+                <button
+                  class="button btn-primary next-btn"
+                  (click)="confirm()"
+                  *ngIf="
+                    currentSort === 'Question' && question_TYPE === 'objective'
+                  "
+                >
+                  Next
+                </button>
+                <!--start options box-->
+                <div class="row options-box" *ngIf="currentSort === 'Options'">
+                  <!-- <div class="checkbox">
+                                  <label>
+                                    <span class="checkbox-icon"></span>
+                                  </label>
+                                </div> -->
+                  <!-- *ngIf="optionArr.length>0" -->
+                  <div class="col-md-12">
+                    &nbsp; &nbsp; &nbsp;Enter Option
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="with-border"
+                        [(ngModel)]="optionArr[0].name"
+                        placeholder="1. option"
+                      />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="with-border"
+                        [(ngModel)]="optionArr[1].name"
+                        placeholder="2. option"
+                      />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="with-border"
+                        [(ngModel)]="optionArr[2].name"
+                        placeholder="3. option"
+                      />
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="with-border"
+                        [(ngModel)]="optionArr[3].name"
+                        placeholder="4. option"
+                      />
+                    </div>
+                    <button class="button btn-primary" (click)="saveOptions()">
+                      Preview
+                    </button>
+                    <div class="clearfix"></div>
+                  </div>
+                  <!-- <div class="col-md-10" *ngIf="optionFlag">
+                                  <select name="" id="">
+                                    <option value="undefined" disabled
+                                      >select right option</option
+                                    >
+                                    <option *ngFor="let opt of optionArr">{{
+                                      opt.name
+                                    }}</option>
+                                  </select>
+                                  <button
+                                    class="button btn-primary"
+                                    (click)="confirmOptions()"
+                                  >
+                                    next
+                                  </button>
+                                </div> -->
+                </div>
+                <!--end options box-->
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-o"
+                role="tabpanel"
+                aria-labelledby="pills-o-tab"
+              >
+                <div class="">
+                  <div class="col-xl-12">
+                    <div class="feedback-yes-no">
+                      <div class="radio col-xl-6">
+                        <input
+                          id="radio-rating-3"
+                          name="radio"
+                          type="radio"
+                          checked
+                        />
+                        <label for="radio-rating-3"
+                          ><span class="radio-label"></span>option three</label
+                        >
+                      </div>
+
+                      <div class="radio col-xl-6">
+                        <input id="radio-rating-4" name="radio" type="radio" />
+                        <label for="radio-rating-4"
+                          ><span class="radio-label"></span>option four</label
+                        >
+                      </div>
+
+                      <div class="radio col-xl-6">
+                        <input
+                          id="radio-rating-5"
+                          name="radio"
+                          type="radio"
+                          checked
+                        />
+                        <label for="radio-rating-5"
+                          ><span class="radio-label"></span>option five</label
+                        >
+                      </div>
+
+                      <div class="radio col-xl-6">
+                        <input id="radio-rating-6" name="radio" type="radio" />
+                        <label for="radio-rating-6"
+                          ><span class="radio-label"></span>option six</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade show"
+                [ngClass]="{
+                  active:
+                    currentSort === 'Choose' &&
+                    !questionOptionPreview &&
+                    optionArr.length > 0
+                }"
+                id="pills-c"
+                role="tabpanel"
+                aria-labelledby="pills-c-tab"
+                *ngIf="optionArr.length > 0"
+              >
+                Choose Option <br />
+                <br />
+                <div class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="c1"
+                    (click)="checkSign(optionArr[0].id)"
+                  />
+                  <label for="c1">
+                    <span class="checkbox-icon"></span>
+                    {{ optionArr[0].name }}
+                  </label>
+                </div>
+                <br />
+                <div class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="c2"
+                    (click)="checkSign(optionArr[1].id)"
+                  />
+                  <label for="c2">
+                    <span class="checkbox-icon"></span>
+                    {{ optionArr[1].name }}
+                  </label>
+                </div>
+                <br />
+                <div class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="c3"
+                    (click)="checkSign(optionArr[2].id)"
+                  />
+                  <label for="c3">
+                    <span class="checkbox-icon"></span>
+                    {{ optionArr[2].name }}
+                  </label>
+                </div>
+                <br />
+                <div class="checkbox">
+                  <input
+                    type="checkbox"
+                    id="c4"
+                    (click)="checkSign(optionArr[3].id)"
+                  />
+                  <label for="c4">
+                    <span class="checkbox-icon"></span>
+                    {{ optionArr[3].name }}
+                  </label>
+                </div>
+                <br />
+                <button class="button btn-primary" (click)="saveRightOptions()">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--tab end-->
+        </div>
+      </div>
+      <!--question part end-->
+
+      <!-- preview start -->
+      <div class="col-xl-12" *ngIf="ques_status">
+        <div class="dashboard-box">
+          <!-- Headline -->
+          <div class="headline">
+            <h5>
+              {{ question.name }}
+            </h5>
+          </div>
+
+          <div class="content with-padding padding-bottom-10">
+            <div [innerHTML]="question.description"></div>
+            <button class="button btn-primary" (click)="back()">
+              Back
+            </button>
+            <button class="button btn-info confirm-btn" (click)="confirm()">
+              Confirm/Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- preview end -->
+
+      <!-- question option preview start -->
+
+      <div class="col-xl-12" *ngIf="questionOptionPreview">
+        <div class="dashboard-box">
+          <!-- Headline -->
+          <div class="headline">
+            <h5>
+              {{ question.name }}
+            </h5>
+          </div>
+
+          <div class="content with-padding padding-bottom-10">
+            <div [innerHTML]="question.description"></div>
+            <ul *ngIf="optionArr && optionArr.length > 0" class="rm-bullet">
+              <li>1. {{ optionArr[0].name }}</li>
+              <li>2. {{ optionArr[1].name }}</li>
+              <li>3. {{ optionArr[2].name }}</li>
+              <li>4. {{ optionArr[3].name }}</li>
+            </ul>
+            <button class="button btn-primary" (click)="gotoOption()">
+              Back
+            </button>
+            <button
+              class="button btn-info confirm-btn"
+              (click)="optionsaveConfirm()"
+            >
+              Confirm/save
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- question option preview end  -->
+    </div>
+    <!-- </div> -->
+  </div>
+</div>

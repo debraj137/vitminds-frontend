@@ -1,0 +1,86 @@
+::ng-deep {
+  .angular-editor-toolbar {
+    .angular-editor-toolbar-set {
+      select {
+        height: 25px;
+        margin: 0px;
+        padding-bottom: 0px;
+        margin-bottom: 0px !important;
+      }
+
+      label {
+        padding: 0px;
+        margin-bottom: 0px;
+      }
+
+      .brdr {
+        //  border: none;
+        border: 0;
+        outline: 1px solid red;
+        border-radius: 4px !important;
+      }
+    }
+  }
+}
+
+.confirm-btn {
+  float: right;
+  // margin-left: 89%;
+}
+
+.preview-btn {
+  // float: right;
+  margin-left: 89%;
+}
+.next-btn {
+  margin-left: 89%;
+}
+
+.rm-bullet {
+  padding-left: 0px;
+
+  li {
+    list-style: none;
+  }
+}
+
+.margin-right-20 {
+  margin-right: 1em;
+  box-shadow: none;
+}
+
+.p-cls {
+  margin-left: 20px;
+  margin-top: -5px;
+}
+
+// .radio input[type=radio] {
+//     opacity: 1;
+//     left: 10px;
+//     top: 3px;
+// }
+
+.mrgn-tp {
+  margin-top: 50px;
+}
+
+.brdr {
+  //  border: none;
+  border: 0;
+  outline: 1px solid red;
+  border-radius: 4px !important;
+}
+.bdr-red {
+  border-color: red !important;
+}
+
+.dashboard-box .content.with-padding {
+  padding: 30px;
+  height: auto;
+}
+.nav-item a {
+  cursor: pointer;
+}
+select {
+  font-size: 13px;
+}

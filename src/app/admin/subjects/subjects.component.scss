@@ -1,0 +1,68 @@
+// // .dataTables_wrapper {
+// //     width: 100%;
+// // }
+// .add-btn {
+//   float: right;
+// }
+
+// .add-box a:hover {
+//   text-decoration: none;
+//   background-color: black;
+//   color: #fff;
+// }
+
+// em {
+//   color: red;
+// }
+
+// .popup-title {
+//   padding-left: 20px;
+//   padding-top: 20px;
+// }
+
+// .floats-right {
+//   float: right;
+// }
+
+// .hvr {
+//   cursor: pointer;
+//   color: red;
+// }
+
+// .with-border {
+//   width: 74%;
+//   margin-top: 1rem;
+// }
+
+// .form-control {
+//   width: 50%;
+//   margin-top: 1rem;
+// }
+
+// .table th,
+// .table td {
+//   // padding: 0.75rem;
+//   padding-left: 2rem;
+// }
+
+::ng-deep {
+  .overlay {
+    top: 5em;
+  }
+}
+
+.delete-ico {
+  font-size: 1.5rem;
+  color: red;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.brdr {
+  border-color: red !important;
+}
+
+.ptr {
+  cursor: pointer;
+  // margin-left: 10%;
+}

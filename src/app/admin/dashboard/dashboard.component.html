@@ -1,0 +1,74 @@
+<!-- Dashboard Content
+	================================================== -->
+<div class="dashboard-content-container" data-simplebar>
+  <div class="dashboard-content-inner">
+    <!-- Dashboard Headline -->
+    <!-- <div class="dashboard-headline">
+            <h3>Howdy, Tom!</h3>
+            <span>We are glad to see you again!</span>-->
+
+    <!-- Breadcrumbs -->
+    <!-- <nav id="breadcrumbs" class="dark">
+              <ul>
+                <li><a href="#">Home</a></li>
+                <li>Dashboard</li>
+              </ul>
+            </nav>
+          </div> -->
+
+    <div class="dashboard-headline sortBySub">
+      <select
+        class="form-control"
+        id="college"
+        (change)="sortByCollege($event)"
+      >
+        <option value="" disabled>Filter By College</option>
+        <option value="0">All</option>
+        <option value="{{ college.id }}" *ngFor="let college of collegeList">{{
+          college.collegeName
+        }}</option>
+      </select>
+    </div>
+    <!-- Fun Facts Container -->
+    <div class="fun-facts-container">
+      <div class="fun-fact" data-fun-fact-color="#36bd78">
+        <div class="fun-fact-text">
+          <span>Total Registered Students</span>
+          <h4>{{ registeredStudentCount }}</h4>
+        </div>
+        <div class="fun-fact-icon">
+          <i class="icon-feather-users"></i>
+        </div>
+      </div>
+      <div class="fun-fact" data-fun-fact-color="#b81b7f">
+        <div class="fun-fact-text">
+          <span>Total Enrolled Students</span>
+          <h4>{{ enrolledStudentCount }}</h4>
+        </div>
+        <div class="fun-fact-icon">
+          <i class="icon-feather-user-check"></i>
+        </div>
+      </div>
+      <div class="fun-fact" data-fun-fact-color="#efa80f">
+        <div class="fun-fact-text">
+          <span>Total Conducted Exams</span>
+          <h4>{{ conductedExamCount }}</h4>
+        </div>
+        <div class="fun-fact-icon">
+          <i class="icon-feather-file-plus"></i>
+        </div>
+      </div>
+
+      <!-- Last one has to be hidden below 1600px, sorry :( -->
+      <!-- <div class="fun-fact" data-fun-fact-color="#2a41e6">
+              <div class="fun-fact-text">
+                <span>This Month Views</span>
+                <h4>987</h4>
+              </div>
+              <div class="fun-fact-icon">
+                <i class="icon-feather-trending-up"></i>
+              </div>
+            </div> -->
+    </div>
+  </div>
+</div>

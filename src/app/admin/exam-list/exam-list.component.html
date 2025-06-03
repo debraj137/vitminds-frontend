@@ -1,0 +1,376 @@
+<!-- <div class="dashboard-content-container"> -->
+<!-- testing ngx start -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <div class="modal">
+    <h1 class="modal-header">Exam Form</h1>
+
+    <!--end modal-body-->
+  </div>
+  <div class="welcome-text">
+    <h3>Create New Exam</h3>
+  </div>
+  <!--modal end-->
+  <form [formGroup]="exam_form">
+    <div class="content with-padding padding-bottom-10">
+      <div class="submit-field">
+        <h5>Exam name<em>*</em></h5>
+        <input
+          type="text"
+          id="name"
+          [(ngModel)]="exam.name"
+          placeholder="exam name"
+          class="with-border"
+          [class.bdr-red]="submitted && step1Form.name.errors"
+          formControlName="name"
+        />
+      </div>
+      <div class="submit-field">
+        <h5>Select course<em>*</em></h5>
+        <select
+          [(ngModel)]="exam.course.id"
+          formControlName="course"
+          class="with-border"
+          [class.bdr-red]="submitted && step1Form.course.errors"
+        >
+          <option [ngValue]="undefined" disabled>Select Course</option>
+          <option value="{{ c.id }}" *ngFor="let c of coursesList">{{
+            c.name
+          }}</option>
+        </select>
+      </div>
+
+      <div class="submit-field">
+        <h5>Select Batch<em>*</em></h5>
+        <select
+          [(ngModel)]="exam.batch.id"
+          formControlName="course"
+          class="with-border"
+          [class.bdr-red]="submitted && step1Form.course.errors"
+        >
+          <option [ngValue]="undefined" disabled>Select Batch</option>
+          <option value="{{ batch.id }}" *ngFor="let batch of batchList">{{
+            batch.batchName
+          }}</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="submit-field">
+            <h5>Exam date<em>*</em></h5>
+            <input
+              class="input is-rounded is-small with-border"
+              [owlDateTime]="dt2"
+              [owlDateTimeTrigger]="dt2"
+              [(ngModel)]="exam.date"
+              placeholder="Exam date"
+              id="examDate"
+              [class.bdr-red]="submitted && step1Form.examDate.errors"
+              formControlName="examDate"
+            />
+            <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="submit-field">
+            <h5>Exam time<em>*</em></h5>
+            <input
+              class="input is-small is-fullwidth is-rounded with-border"
+              [owlDateTime]="dt3"
+              [owlDateTimeTrigger]="dt3"
+              [(ngModel)]="exam.startTime"
+              id="examTime"
+              formControlName="examTime"
+              [class.bdr-red]="submitted && step1Form.examDate.errors"
+              placeholder="Start time"
+            />
+            <owl-date-time
+              [hour12Timer]="true"
+              [pickerType]="'timer'"
+              #dt3
+            ></owl-date-time>
+          </div>
+        </div>
+
+        <div class="col-xl-12">
+          <div class="submit-field">
+            <h5>Duration<em>*</em></h5>
+            <!--  <input type="text" class="with-border" id="duration" formControlName="duration" [(ngModel)]="exam.duration"
+              placeholder="duration in mins" /> -->
+
+            <input
+              type="text"
+              id="duration"
+              [(ngModel)]="exam.duration"
+              placeholder="duration in mins"
+              class="with-border"
+              [class.bdr-red]="submitted && step1Form.duration.errors"
+              formControlName="duration"
+            />
+          </div>
+          <div class="submit-field">
+            <h5>Max marks<em>*</em></h5>
+            <!-- <input type="text" class="with-border" id="max_marks" formControlName="max_marks"
+              [(ngModel)]="exam.maxmarks" placeholder="marks" /> -->
+
+            <input
+              type="number"
+              id="marks"
+              [(ngModel)]="exam.maxmarks"
+              placeholder="marks"
+              class="with-border"
+              [class.bdr-red]="submitted && step1Form.max_marks.errors"
+              formControlName="max_marks"
+            />
+          </div>
+          <div class="submit-field">
+            <h5>Passing marks<em>*</em></h5>
+            <!-- <input type="text" class="with-border" id="passing_marks" formControlName="passing_marks"
+              [(ngModel)]="exam.passmarks" placeholder="passing marks" /> -->
+
+            <input
+              type="number"
+              id="passing_marks"
+              [(ngModel)]="exam.passmarks"
+              placeholder="marks"
+              class="with-border"
+              [class.bdr-red]="submitted && step1Form.passing_marks.errors"
+              formControlName="passing_marks"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row col-xl-12"> -->
+      <!-- <a class="button col-xl-3 small margin-top-30"> Cancel</a> -->
+      <a (click)="saveExam()" class="button small margin-top-30 f-r">Save</a>
+      <!-- </div> -->
+    </div>
+  </form>
+
+  <!-- <button class="btn btn-primary" (click)="myModal.close()">Close</button> -->
+</ngx-smart-modal>
+
+<ngx-smart-modal #myTokenModal identifier="myTokenModal">
+  <!-- <div class="modal"> -->
+  <!-- <h1 class="modal-header">Exam Token</h1> -->
+  <!-- <form> -->
+  <div class="content with-padding padding-bottom-10">
+    <div class="submit-field">
+      <h5>Exam Token<em>*</em></h5>
+      <input
+        type="text"
+        id="token"
+        [(ngModel)]="examToken"
+        placeholder="exam token"
+        class="with-border"
+      />
+    </div>
+
+    <a (click)="createExamToken()" class="button small margin-top-30 f-r"
+      >Save</a
+    >
+  </div>
+  <!-- </form> -->
+  <!-- </div> -->
+</ngx-smart-modal>
+<!-- testing ngx end -->
+<div class="dashboard-content-inner" *ngIf="!editFlag">
+  <div class="dashboard-headline">
+    <h3>Exams</h3>
+
+    <!-- Breadcrumbs -->
+
+    <nav id="breadcrumbs" class="dark admin-add-btn">
+      <ul class="">
+        <li>
+          <button
+            class="popup-with-zoom-anim button full-width button-sliding-icon"
+            (click)="ngxSmartModalService.getModal('myModal').open()"
+          >
+            Add Exam <i class="icon-material-outline-arrow-right-alt"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- Row -->
+  <div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+      <div class="dashboard-box">
+        <!-- Headline -->
+        <div class="headline">
+          <h5>
+            <i class="icon-feather-folder-plus"></i> Exam List
+            <!-- <button
+                  class="btn btn-primary btn-sm floats-right"
+                  type="button"
+                  [routerLink]="['/admin/create-exam']"
+                >
+                  Add
+                </button> -->
+          </h5>
+          <br />
+          <div class="submit-field margin-bottom-0">
+            <select
+              class="form-control sortBySub"
+              id="subject"
+              (change)="sortBySubject($event)"
+            >
+              <option value="undefined" disabled>Sort By Subject</option>
+              <option value="All">All</option>
+              <option value="{{ sub.id }}" *ngFor="let sub of subjectlist">{{
+                sub.name
+              }}</option>
+            </select>
+          </div>
+          <input
+            [(ngModel)]="searchText"
+            placeholder="Search exam.."
+            class="form-control"
+            [ngStyle]="{ width: '200px' }"
+          />
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <!-- <th>ID</th> -->
+
+              <th scope="col">Name</th>
+              <th scope="col">Course</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Exam Token</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr scope="row" *ngFor="let exam of listOfExam">
+              <!-- <td>{{ i + 1 }}</td> -->
+              <td>{{ exam.name }}</td>
+              <td>{{ exam.course.name }}</td>
+              <td>{{ exam.course.subject.name }}</td>
+              <td>{{ exam.examToken }}</td>
+              <td>{{ exam.date }}</td>
+              <td>{{ exam.startTime }}</td>
+              <td>
+                <!-- <button class="btn btn-primary" (click)="edit(course)">
+                      Edit
+                    </button> -->
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Assign Batch"
+                  class="icon-material-outline-assignment ptr"
+                  (click)="assignBatch(exam.id)"
+                ></i>
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"
+                  class="fa fa-edit ptr"
+                  (click)="edit(exam)"
+                ></i>
+                <!-- <button class="btn btn-primary" (click)="delete(course)">
+                      Delete
+                    </button> -->
+                <span class="delete-ico">
+                  <i
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete"
+                    class="icon-line-awesome-trash-o"
+                    (click)="confirmModel(exam)"
+                  ></i>
+                </span>
+                <!-- <button
+                      class="btn btn-primary"
+                      (click)="assignQuestion(course)"
+                    >
+                      assign Q
+                    </button> -->
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="AssignQuestion"
+                  class="icon-material-outline-assignment ptr"
+                  (click)="assignQuestion(exam)"
+                ></i>
+
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Copy Exam"
+                  class="icon-material-outline-assignment ptr"
+                  (click)="examClone(exam.id)"
+                ></i>
+
+                <i
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Create Token"
+                  class="icon-material-outline-assignment ptr"
+                  (click)="openExamTokenModal(exam.id)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          [pageSize]="10"
+          [length]="totalElements"
+          (page)="nextPage($event)"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+
+    <!--Pop Up Box for Subject-->
+    <div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+      <!--Tabs -->
+      <div class="sign-in-form">
+        <ul class="popup-tabs-nav">
+          <div class="popup-title">
+            <h4>Add Subject</h4>
+          </div>
+        </ul>
+
+        <div class="popup-tabs-container">
+          <!-- Tab -->
+          <div class="popup-tab-content" id="tab1">
+            <div class="content with-padding padding-bottom-10">
+              <div class="row">
+                <div class="col-xl-12">
+                  <div class="submit-field">
+                    <h5>Name<em>*</em></h5>
+                    <input type="text" class="with-border" value="Tom" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <a
+                  href="#"
+                  class="button small col-xl-3 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-cancel"></i> Cancel</a
+                >
+                <a
+                  href="#"
+                  class="button small col-xl-3 offset-xl-6 ripple-effect big margin-top-30"
+                  ><i class="icon-feather-sa"></i> Save</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Dashboard Content / End -->
+  </div>
+  <!-- Dashboard Container / End -->
+</div>
+
+<app-question *ngIf="editFlag"></app-question>
+<!-- </div> -->
